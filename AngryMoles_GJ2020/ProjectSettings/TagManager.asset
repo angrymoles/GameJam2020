@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - ShadowObstacle
   - 
   - 
   - 
@@ -43,4 +43,10 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3272460921
+    locked: 0
+  - name: ShadowObstacle
+    uniqueID: 3369480117
+    locked: 0
+  - name: Player
+    uniqueID: 1928332547
     locked: 0
