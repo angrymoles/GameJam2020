@@ -56,17 +56,17 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: Shoot_PH
-    clip: {fileID: 8300000, guid: 786be4e9d4a3d9141a56c411f2de5f7b, type: 3}
+    clip: {fileID: 8300000, guid: aa32d58bee73ce3469947a67137732f6, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: TestSound
-    clip: {fileID: 8300000, guid: 786be4e9d4a3d9141a56c411f2de5f7b, type: 3}
+  - name: LanternOpen
+    clip: {fileID: 8300000, guid: 0d81b8da0eef1cf46a82625c2380d074, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: TestSound
-    clip: {fileID: 8300000, guid: 786be4e9d4a3d9141a56c411f2de5f7b, type: 3}
+  - name: LanternClose
+    clip: {fileID: 8300000, guid: 9b21b89e06e435c4b8f48c0aae6dbe3c, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
