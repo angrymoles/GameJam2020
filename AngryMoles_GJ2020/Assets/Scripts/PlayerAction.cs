@@ -14,7 +14,6 @@ public class PlayerAction : MonoBehaviour
     }
 
     public Lamp lamp;
-    public PolygonCollider2D shieldCollider;
     public PolygonCollider2D bodyCollider;
     //private PLAYER_STATE playerState;
     private bool shadowActive = false;
@@ -22,7 +21,7 @@ public class PlayerAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //shieldCollider.enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -78,12 +77,10 @@ public class PlayerAction : MonoBehaviour
             if (shieldActive)
             {
                 lamp.ActivateShield();
-                //shieldCollider.enabled = true;
             }
             else
             {
                 lamp.DeactivateShield();
-                //shieldCollider.enabled = false;
             }
         }        
     }
