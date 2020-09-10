@@ -31,6 +31,16 @@ public class PlayerAction : MonoBehaviour
         {
             lamp.SetPower(Time.deltaTime);
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            lamp.ActiveBarrier(false);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            lamp.ActiveBarrier(true);
+        }
     }
 
     void SetShadowMode(bool bShadow)

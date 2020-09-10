@@ -30,5 +30,10 @@ public class PlayerMovement : MonoBehaviour
         Vector2 lookDir = mousePos - rigidBody.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
         rigidBody.rotation = angle;
+        if (Vector3.Magnitude(lookDir) > 1.0f)
+        {
+            lookDir.Normalize();
+            rigidBody.MovePosition(rigidBody.position + lookDir * moveSpeed * Time.fixedDeltaTime);
+        }
     }
 }

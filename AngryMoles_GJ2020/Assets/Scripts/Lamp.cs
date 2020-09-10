@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Lamp : MonoBehaviour
 {
+    public GameObject Barrier;
+    public Transform BarrierTransform;
     public float innerMaxAngle = 60.0f;
     public float outerMaxAngle = 120.0f;
     public float innerMaxRadius = 1.0f;
@@ -12,7 +14,7 @@ public class Lamp : MonoBehaviour
     public float maxIntensity = 2.0f;
     public float maxBarrierScale = 10.0f;
     public float speed = 0.1f;
-    public Light2D lamp;
+    public UnityEngine.Experimental.Rendering.Universal.Light2D lamp;
 
     public float powerRate = 1.0f;
     // Start is called before the first frame update
@@ -35,10 +37,16 @@ public class Lamp : MonoBehaviour
             powerRate = 1.0f;
         }
 
-        if (powerRate < 0.0f)
+        if (powerRate <= 0.0f)
         {
             powerRate = 0.0f;
+            Barrier.SetActive( false );
         }
+    }
+
+    public void ActiveBarrier(bool bActive)
+    {
+        Barrier.SetActive(bActive);
     }
 
     public void UpdateLight()
@@ -48,5 +56,8 @@ public class Lamp : MonoBehaviour
         lamp.pointLightInnerRadius = innerMaxRadius * powerRate;
         lamp.pointLightOuterRadius = outerMaxRadius * powerRate;
         lamp.intensity = maxIntensity * powerRate;
+        Vector3 scale = BarrierTransform.localScale;
+        scale.x = 0.4f * powerRate;
+        BarrierTransform.localScale = scale;
     }
 }
