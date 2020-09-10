@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine.Experimental.Rendering.LWRP;
 using UnityEngine;
+using System;
 
-public class Lamp : MonoBehaviour
+[System.Serializable]
+public class LightSettings
 {
     public float innerMaxAngle = 60.0f;
     public float outerMaxAngle = 120.0f;
@@ -11,52 +13,86 @@ public class Lamp : MonoBehaviour
     public float outerMaxRadius = 5.0f;
     public float maxIntensity = 2.0f;
     public float maxBarrierScale = 10.0f;
-    public float speed = 0.1f;
+    public float transitionDuration = 1.0f;
+
+    public LightSettings Clone() { return (LightSettings)this.MemberwiseClone(); }
+}
+
+public class Lamp : MonoBehaviour
+{
+
+
+    public LightSettings defaultLightSettings;
+    public LightSettings shieldLightSettings;
+    public LightSettings shadowLightSettings;
+    public UnityEngine.Experimental.Rendering.Universal.Light2D lamp;
+    public float powerRate = 1.0f;
+
     private float maxCapacity = 1f;
     private float currentCapacity;
-    private bool shadowActivated;
-    public UnityEngine.Experimental.Rendering.Universal.Light2D lamp;
+    private float transitionTiming = 0f;
 
-    public float powerRate = 1.0f;
+    private LightSettings currentLightSettings;
+    private LightSettings targetLightSettings;
+
+
     // Start is called before the first frame update
     void Start()
     {
         currentCapacity = maxCapacity;
-        shadowActivated = false;
-
+        currentLightSettings = defaultLightSettings.Clone();
+        targetLightSettings = defaultLightSettings.Clone();
     }
 
     public void ActivateShadow()
     {
-        // do something here when the shadow power is activated
+        targetLightSettings = shadowLightSettings;
+        transitionTiming = 0f;
+    }
+    
+    public void DeactivateShadow()
+    {
+        targetLightSettings = defaultLightSettings;
+        transitionTiming = 0f;
+    }
+
+    public void ActivateShield()
+    {
+        targetLightSettings = shieldLightSettings;
+        transitionTiming = 0f;
+    }
+
+    public void DeactivateShield()
+    {
+        DeactivateShadow();
     }
 
     void Update()
     {
+        if (transitionTiming < targetLightSettings.transitionDuration)
+        {
+            transitionTiming += Time.deltaTime;
+            if ( transitionTiming > targetLightSettings.transitionDuration)
+            {
+                transitionTiming = targetLightSettings.transitionDuration; ;
+            }
+        }
         UpdateLight();
-    }
-
-    public void SetPower(float value)
-    {
-        powerRate = powerRate + speed * value;
-
-        if (powerRate > 1.0f)
-        {
-            powerRate = 1.0f;
-        }
-
-        if (powerRate < 0.0f)
-        {
-            powerRate = 0.0f;
-        }
     }
 
     public void UpdateLight()
     {
-        lamp.pointLightInnerAngle = innerMaxAngle * powerRate;
-        lamp.pointLightOuterAngle = outerMaxAngle * powerRate;
-        lamp.pointLightInnerRadius = innerMaxRadius * powerRate;
-        lamp.pointLightOuterRadius = outerMaxRadius * powerRate;
-        lamp.intensity = maxIntensity * powerRate;
+        float percentComplete = transitionTiming / targetLightSettings.transitionDuration;
+        currentLightSettings.innerMaxAngle = Mathf.Lerp(currentLightSettings.innerMaxAngle, targetLightSettings.innerMaxAngle, percentComplete);
+        currentLightSettings.outerMaxAngle = Mathf.Lerp(currentLightSettings.outerMaxAngle, targetLightSettings.outerMaxAngle, percentComplete);
+        currentLightSettings.innerMaxRadius = Mathf.Lerp(currentLightSettings.innerMaxRadius, targetLightSettings.innerMaxRadius, percentComplete);
+        currentLightSettings.outerMaxRadius = Mathf.Lerp(currentLightSettings.outerMaxRadius, targetLightSettings.outerMaxRadius, percentComplete);
+        currentLightSettings.maxIntensity = Mathf.Lerp(currentLightSettings.maxIntensity, targetLightSettings.maxIntensity, percentComplete);
+
+        lamp.pointLightInnerAngle = currentLightSettings.innerMaxAngle;
+        lamp.pointLightOuterAngle = currentLightSettings.outerMaxAngle;
+        lamp.pointLightInnerRadius = currentLightSettings.innerMaxRadius;
+        lamp.pointLightOuterRadius = currentLightSettings.outerMaxRadius;
+        lamp.intensity = currentLightSettings.maxIntensity;
     }
 }
