@@ -134,5 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 0}
-  destoryHitEffectTime: 1
+  destroyHitEffectTime: 1
   lifeTime: 10
+  damage: 1

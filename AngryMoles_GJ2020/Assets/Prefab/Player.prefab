@@ -296,7 +296,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lamp: {fileID: 1619448017792371617}
-  shieldCollider: {fileID: 0}
   bodyCollider: {fileID: 1619448017278948603}
 --- !u!60 &1619448017278948603
 PolygonCollider2D:
@@ -425,38 +424,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultLightSettings:
-    innerMaxAngle: 75
-    outerMaxAngle: 360
-    innerMaxRadius: 1
-    outerMaxRadius: 20
-    maxIntensity: 2
-    maxBarrierScale: 20
+    cone:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
+    point:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
     transitionDuration: 0.7
   shieldLightSettings:
-    innerMaxAngle: 60
-    outerMaxAngle: 120
-    innerMaxRadius: 2
-    outerMaxRadius: 8
-    maxIntensity: 2
-    maxBarrierScale: 10
+    cone:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
+    point:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
     transitionDuration: 0.7
   shieldEmptyLightSettings:
-    innerMaxAngle: 60
-    outerMaxAngle: 120
-    innerMaxRadius: 1
-    outerMaxRadius: 5
-    maxIntensity: 2
-    maxBarrierScale: 10
+    cone:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
+    point:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
     transitionDuration: 1
   shadowLightSettings:
-    innerMaxAngle: 10
-    outerMaxAngle: 20
-    innerMaxRadius: 1
-    outerMaxRadius: 5
-    maxIntensity: 0.1
-    maxBarrierScale: 10
+    cone:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
+    point:
+      innerMaxAngle: 60
+      outerMaxAngle: 120
+      innerMaxRadius: 1
+      outerMaxRadius: 5
+      maxIntensity: 2
+      maxBarrierScale: 10
     transitionDuration: 0.2
-  lamp: {fileID: 269379187}
+  point: {fileID: 340796631}
+  cone: {fileID: 269379187}
   maxShadowDuration: 2
   maxShieldDuration: 5
   shieldRechargeTime: 5

@@ -4,6 +4,15 @@ using UnityEngine.Experimental.Rendering.LWRP;
 using UnityEngine;
 using System;
 
+
+[System.Serializable]
+public class LightPair
+{
+    public LightSettings cone;
+    public LightSettings point;
+    public float transitionDuration = 1.0f;
+    public LightPair Clone() { return (LightPair)this.MemberwiseClone(); }
+}
 [System.Serializable]
 public class LightSettings
 {
@@ -13,18 +22,18 @@ public class LightSettings
     public float outerMaxRadius = 5.0f;
     public float maxIntensity = 2.0f;
     public float maxBarrierScale = 10.0f;
-    public float transitionDuration = 1.0f;
 
     public LightSettings Clone() { return (LightSettings)this.MemberwiseClone(); }
 }
 
 public class Lamp : MonoBehaviour
 {
-    public LightSettings defaultLightSettings;
-    public LightSettings shieldLightSettings;
-    public LightSettings shieldEmptyLightSettings;
-    public LightSettings shadowLightSettings;
-    public UnityEngine.Experimental.Rendering.Universal.Light2D lamp;
+    public LightPair defaultLightSettings;
+    public LightPair shieldLightSettings;
+    public LightPair shieldEmptyLightSettings;
+    public LightPair shadowLightSettings;
+    public UnityEngine.Experimental.Rendering.Universal.Light2D point;
+    public UnityEngine.Experimental.Rendering.Universal.Light2D cone;
 
     public float maxShadowDuration = 2.0f;
     public float maxShieldDuration = 5f;
@@ -43,8 +52,8 @@ public class Lamp : MonoBehaviour
     private bool shadowActive = false;
     //private bool shieldBurnedOut = false;
 
-    private LightSettings currentLightSettings;
-    private LightSettings targetLightSettings;
+    private LightPair currentLightSettings;
+    private LightPair targetLightSettings;
 
     private BoxCollider2D shieldCollider;
     private SpriteRenderer sprite;
@@ -207,16 +216,28 @@ public class Lamp : MonoBehaviour
     {
         float percentComplete = transitionTiming / targetLightSettings.transitionDuration;
 
-        currentLightSettings.innerMaxAngle = Mathf.Lerp(currentLightSettings.innerMaxAngle, targetLightSettings.innerMaxAngle, percentComplete);
-        currentLightSettings.outerMaxAngle = Mathf.Lerp(currentLightSettings.outerMaxAngle, targetLightSettings.outerMaxAngle, percentComplete);
-        currentLightSettings.innerMaxRadius = Mathf.Lerp(currentLightSettings.innerMaxRadius, targetLightSettings.innerMaxRadius, percentComplete);
-        currentLightSettings.outerMaxRadius = Mathf.Lerp(currentLightSettings.outerMaxRadius, targetLightSettings.outerMaxRadius, percentComplete);
-        currentLightSettings.maxIntensity = Mathf.Lerp(currentLightSettings.maxIntensity, targetLightSettings.maxIntensity, percentComplete);
+        currentLightSettings.cone.innerMaxAngle = Mathf.Lerp(currentLightSettings.cone.innerMaxAngle, targetLightSettings.cone.innerMaxAngle, percentComplete);
+        currentLightSettings.cone.outerMaxAngle = Mathf.Lerp(currentLightSettings.cone.outerMaxAngle, targetLightSettings.cone.outerMaxAngle, percentComplete);
+        currentLightSettings.cone.innerMaxRadius = Mathf.Lerp(currentLightSettings.cone.innerMaxRadius, targetLightSettings.cone.innerMaxRadius, percentComplete);
+        currentLightSettings.cone.outerMaxRadius = Mathf.Lerp(currentLightSettings.cone.outerMaxRadius, targetLightSettings.cone.outerMaxRadius, percentComplete);
+        currentLightSettings.cone.maxIntensity = Mathf.Lerp(currentLightSettings.cone.maxIntensity, targetLightSettings.cone.maxIntensity, percentComplete);
 
-        lamp.pointLightInnerAngle = currentLightSettings.innerMaxAngle;
-        lamp.pointLightOuterAngle = currentLightSettings.outerMaxAngle;
-        lamp.pointLightInnerRadius = currentLightSettings.innerMaxRadius;
-        lamp.pointLightOuterRadius = currentLightSettings.outerMaxRadius;
-        lamp.intensity = currentLightSettings.maxIntensity;
+        cone.pointLightInnerAngle = currentLightSettings.cone.innerMaxAngle;
+        cone.pointLightOuterAngle = currentLightSettings.cone.outerMaxAngle;
+        cone.pointLightInnerRadius = currentLightSettings.cone.innerMaxRadius;
+        cone.pointLightOuterRadius = currentLightSettings.cone.outerMaxRadius;
+        cone.intensity = currentLightSettings.cone.maxIntensity;
+
+        currentLightSettings.point.innerMaxAngle = Mathf.Lerp(currentLightSettings.point.innerMaxAngle, targetLightSettings.point.innerMaxAngle, percentComplete);
+        currentLightSettings.point.outerMaxAngle = Mathf.Lerp(currentLightSettings.point.outerMaxAngle, targetLightSettings.point.outerMaxAngle, percentComplete);
+        currentLightSettings.point.innerMaxRadius = Mathf.Lerp(currentLightSettings.point.innerMaxRadius, targetLightSettings.point.innerMaxRadius, percentComplete);
+        currentLightSettings.point.outerMaxRadius = Mathf.Lerp(currentLightSettings.point.outerMaxRadius, targetLightSettings.point.outerMaxRadius, percentComplete);
+        currentLightSettings.point.maxIntensity = Mathf.Lerp(currentLightSettings.point.maxIntensity, targetLightSettings.point.maxIntensity, percentComplete);
+
+        point.pointLightInnerAngle = currentLightSettings.point.innerMaxAngle;
+        point.pointLightOuterAngle = currentLightSettings.point.outerMaxAngle;
+        point.pointLightInnerRadius = currentLightSettings.point.innerMaxRadius;
+        point.pointLightOuterRadius = currentLightSettings.point.outerMaxRadius;
+        point.intensity = currentLightSettings.point.maxIntensity;
     }
 }
