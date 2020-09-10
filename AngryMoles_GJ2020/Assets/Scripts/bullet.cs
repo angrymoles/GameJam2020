@@ -13,13 +13,13 @@ public class bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Barrier")
-        {
-            return;
-        }
-
         if (collision.gameObject.tag == "Player")
         {
+            if (collision.GetContact(0).collider.transform.gameObject.name == "Barrier")
+            {
+                return;
+            }
+
             Player player = collision.gameObject.GetComponent<Player>();
             if (player == null)
             {
