@@ -56,7 +56,7 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   - name: Shoot_PH
-    clip: {fileID: 8300000, guid: f9a8a4b5bd5fa3d41bf2bf7918aec74f, type: 3}
+    clip: {fileID: 8300000, guid: aa32d58bee73ce3469947a67137732f6, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
@@ -95,7 +95,6 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  SoundPrefab: {fileID: 0}
 --- !u!82 &3241312468600405344
 AudioSource:
   m_ObjectHideFlags: 0
