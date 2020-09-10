@@ -5,7 +5,7 @@ using UnityEngine;
 public class bullet : MonoBehaviour
 {
     public GameObject hitEffect;
-    public float destoryHitEffectTime = 1f;
+    public float destroyHitEffectTime = 1f;
     public float lifeTime = 10f;
 
     private float timeSpan = 0f;
@@ -18,7 +18,7 @@ public class bullet : MonoBehaviour
         }
 
         GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, destoryHitEffectTime);
+        Destroy(effect, destroyHitEffectTime);
     }
     // Start is called before the first frame update
     void Start()

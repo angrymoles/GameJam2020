@@ -12,13 +12,23 @@ public class Lamp : MonoBehaviour
     public float maxIntensity = 2.0f;
     public float maxBarrierScale = 10.0f;
     public float speed = 0.1f;
+    private float maxCapacity = 1f;
+    private float currentCapacity;
+    private bool shadowActivated;
     public UnityEngine.Experimental.Rendering.Universal.Light2D lamp;
 
     public float powerRate = 1.0f;
     // Start is called before the first frame update
     void Start()
     {
-        powerRate = 1.0f;
+        currentCapacity = maxCapacity;
+        shadowActivated = false;
+
+    }
+
+    public void ActivateShadow()
+    {
+        // do something here when the shadow power is activated
     }
 
     void Update()

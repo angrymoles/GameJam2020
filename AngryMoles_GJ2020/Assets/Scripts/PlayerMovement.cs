@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float pointerDist = 5f;
     public Rigidbody2D rigidBody;
     public Camera mainCamera;
 
@@ -26,7 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidBody.MovePosition(rigidBody.position + movement * moveSpeed * Time.fixedDeltaTime);
+        Vector2 frameTargetPos = (mousePos - rigidBody.position) * moveSpeed * Time.fixedDeltaTime;
+        rigidBody.MovePosition(rigidBody.position + frameTargetPos);
         Vector2 lookDir = mousePos - rigidBody.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
         rigidBody.rotation = angle;
