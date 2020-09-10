@@ -2,33 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UIElements;
+using UnityEngine.PlayerLoop;
 
 public class CanvasManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    
+    public Audiomanager audioManager;  
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    [MenuItem("StartGame")]
     public void PlayButton()
     {
         gameObject.SetActive(false);
         //activate Camera Zoom
 
     }
+   
 
-    [MenuItem("OpenCanvas")]
     public void OpenCanvas()
     {
         gameObject.SetActive(true);
+    }
+
+    public void SetVolumeBySlider()
+    {
+       // audioManager.AdjustVolume();
     }
 
 }

@@ -1,13 +1,15 @@
 ﻿using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using UnityEngine.UIElements;
 
 public class Audiomanager : MonoBehaviour
 {
     public Sound[] sounds;
+    public GameObject volumeSlider;
     // Start is called before the first frame update
 
-    public static Audiomanager instance;
+    public static Audiomanager instance;   
 
     public void Awake()
     {
@@ -28,16 +30,16 @@ public class Audiomanager : MonoBehaviour
         }
 
     }
-
-    public void Start()
-    {
-        Play("TestSound");
-    }
-
-    public void Play(string name)
-    {
+    
+    public void PlayOneTimeSound(string name)
+    {       
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
-
     }
+    public void AdjustVolume()
+    {
+        AudioListener.volume = volumeSlider.GetComponent<Slider>().value;
+    }
+
+    
 }

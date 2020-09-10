@@ -95,6 +95,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  SoundPrefab: {fileID: 0}
 --- !u!82 &3241312468600405344
 AudioSource:
   m_ObjectHideFlags: 0
