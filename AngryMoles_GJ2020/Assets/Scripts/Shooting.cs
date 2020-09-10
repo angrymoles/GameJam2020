@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
+    public float fireRateTime = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class Shooting : MonoBehaviour
         while (true)
         {
             Shoot();
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(fireRateTime);
         }
     }
 

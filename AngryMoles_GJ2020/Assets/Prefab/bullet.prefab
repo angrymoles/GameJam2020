@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7939114945278376714}
   - component: {fileID: 7939114945278376725}
   - component: {fileID: -9128425447530574865}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -135,3 +136,4 @@ MonoBehaviour:
   hitEffect: {fileID: 0}
   destoryHitEffectTime: 1
   lifeTime: 10
+  damage: 1

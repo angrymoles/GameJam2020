@@ -7,18 +7,49 @@ public class bullet : MonoBehaviour
     public GameObject hitEffect;
     public float destoryHitEffectTime = 1f;
     public float lifeTime = 10f;
+    public int damage = 1;
 
     private float timeSpan = 0f;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (hitEffect == null)
+        if (collision.gameObject.tag == "Barrier")
         {
             return;
         }
 
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, destoryHitEffectTime);
+        if (collision.gameObject.tag == "Player")
+        {
+            Player player = collision.gameObject.GetComponent<Player>();
+            if (player == null)
+            {
+                return;
+            }
+            player.Hit(damage);
+        }
+
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Enemy enemey = collision.gameObject.GetComponent<Enemy>();
+            if (enemey == null)
+            {
+                return;
+            }
+
+            enemey.Hit(damage);
+        }
+
+        if (hitEffect == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        else
+        {
+            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Destroy(effect, destoryHitEffectTime);
+            Destroy(gameObject);
+        }
     }
     // Start is called before the first frame update
     void Start()
