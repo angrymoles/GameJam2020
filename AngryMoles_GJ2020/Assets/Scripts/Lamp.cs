@@ -25,6 +25,7 @@ public class Lamp : MonoBehaviour
     public LightSettings shieldEmptyLightSettings;
     public LightSettings shadowLightSettings;
     public UnityEngine.Experimental.Rendering.Universal.Light2D lamp;
+
     public float maxShadowDuration = 2.0f;
     public float maxShieldDuration = 5f;
     public float shieldRechargeTime = 5f;
