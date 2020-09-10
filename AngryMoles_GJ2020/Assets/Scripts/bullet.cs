@@ -7,18 +7,20 @@ public class bullet : MonoBehaviour
     public GameObject hitEffect;
     public float destroyHitEffectTime = 1f;
     public float lifeTime = 10f;
+    public float damage = 1f;
+    //public UnityEngine.Experimental.Rendering.Universal.Light2D attachedLight;
 
     private float timeSpan = 0f;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (hitEffect == null)
+        if (hitEffect != null)
         {
-            return;
+            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Destroy(effect, destroyHitEffectTime);
         }
 
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, destroyHitEffectTime);
+        Destroy(gameObject);
     }
     // Start is called before the first frame update
     void Start()

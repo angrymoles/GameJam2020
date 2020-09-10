@@ -22,7 +22,7 @@ public class PlayerAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //playerState = PLAYER_STATE.E_NORMAL;
+        //shieldCollider.enabled = false;
     }
 
     // Update is called once per frame
@@ -44,17 +44,12 @@ public class PlayerAction : MonoBehaviour
         {
             ToggleShadow(true);
             ToggleShield(false);
-            //lamp.SetPower(-Time.deltaTime);
         }
         else
         {
             ToggleShield(false);
             ToggleShadow(false);
         }
-        //else
-        //{
-        //    lamp.SetPower(Time.deltaTime);
-        //}
     }
 
     private void ToggleShadow(bool active)
@@ -66,7 +61,6 @@ public class PlayerAction : MonoBehaviour
             {
                 lamp.ActivateShadow();
                 bodyCollider.enabled = false;
-                shieldCollider.enabled = false;
             }
             else
             {
@@ -84,12 +78,12 @@ public class PlayerAction : MonoBehaviour
             if (shieldActive)
             {
                 lamp.ActivateShield();
-                shieldCollider.enabled = true;
+                //shieldCollider.enabled = true;
             }
             else
             {
                 lamp.DeactivateShield();
-                shieldCollider.enabled = false;
+                //shieldCollider.enabled = false;
             }
         }        
     }
