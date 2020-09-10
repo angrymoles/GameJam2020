@@ -153,6 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1619448017278948551}
+  - component: {fileID: 802144451617442097}
   - component: {fileID: 1619448017278948601}
   - component: {fileID: 1619448017278948550}
   - component: {fileID: 1619448017278948548}
@@ -180,6 +181,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &802144451617442097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619448017278948549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b83cf5aba21ca429978434fa48a768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 1
+  movementSpeed: 5
+  playerAction: {fileID: 1619448017278948600}
+  playerMovement: {fileID: 1619448017278948601}
 --- !u!114 &1619448017278948601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +212,6 @@ MonoBehaviour:
   moveSpeed: 1
   pointerDist: 1
   rigidBody: {fileID: 1619448017278948550}
-  mainCamera: {fileID: 0}
 --- !u!50 &1619448017278948550
 Rigidbody2D:
   serializedVersion: 4
@@ -453,6 +469,14 @@ MonoBehaviour:
     maxIntensity: 2
     maxBarrierScale: 10
     transitionDuration: 0.7
+  shieldEmptyLightSettings:
+    innerMaxAngle: 60
+    outerMaxAngle: 120
+    innerMaxRadius: 1
+    outerMaxRadius: 5
+    maxIntensity: 2
+    maxBarrierScale: 10
+    transitionDuration: 1
   shadowLightSettings:
     innerMaxAngle: 10
     outerMaxAngle: 20
@@ -462,4 +486,7 @@ MonoBehaviour:
     maxBarrierScale: 10
     transitionDuration: 0.2
   lamp: {fileID: 269379187}
-  powerRate: 1
+  maxShadowDuration: 2
+  maxShieldDuration: 5
+  shieldRechargeTime: 5
+  shieldRechargeInitialDelay: 1
