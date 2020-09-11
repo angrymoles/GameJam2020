@@ -12,6 +12,12 @@ public class Enemy : MonoBehaviour
 
         if (HP <= 0)
         {
+            var playerObj = GameObject.FindGameObjectWithTag("Player");
+            if ( playerObj )
+            {
+                var player = playerObj.GetComponent<Player>();
+                player.ScoreKill();
+            }
             Destroy(gameObject);
         }
     }
