@@ -70,8 +70,8 @@ public class Lamp : MonoBehaviour
     private float shieldMaxDist;
     private float shieldMinDist;
     public float shieldMinDistPercent = 0.5f;
-    public GameObject shieldTriggerVFX;
-    public GameObject shieldEmptyVFX;
+    public GameObject shieldTriggerFX;
+    public GameObject shieldEmptyFX;
 
     // Start is called before the first frame update
     void Start()
@@ -156,10 +156,10 @@ public class Lamp : MonoBehaviour
             targetLightSettings.transitionDuration = localMaxShieldDuration;
             elapsedShieldDownTime = 0f;
             
-            if ( shieldTriggerVFX != null)
+            if ( shieldTriggerFX != null)
             {
-                ParticleSystem particleSystem = shieldTriggerVFX.GetComponent<ParticleSystem>();
-                particleSystem.Play();
+                GameObject effect = Instantiate(shieldTriggerFX, transform.position, Quaternion.identity);
+                Destroy(effect, 2f);
             }
         }
     }
@@ -192,10 +192,10 @@ public class Lamp : MonoBehaviour
         shieldActive = false;
         shieldCollider.enabled = false;
         sprite.enabled = false;
-        if ( shieldEmptyVFX != null )
+        if ( shieldEmptyFX != null )
         {
-            ParticleSystem particleSystem = shieldEmptyVFX.GetComponent<ParticleSystem>();
-            particleSystem.Play();
+            GameObject effect = Instantiate(shieldEmptyFX, transform.position, Quaternion.identity);
+            Destroy(effect, 2f);
         }
     }
 
