@@ -4,23 +4,14 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManagerScript : MonoBehaviour
+public class  GameManagerScript : MonoBehaviour
 {
     //public static GameManagerScript instance;
     public float transitionTime = 1f;
     public int EscMessageNumber=-1;
     
     // Start is called before the first frame update
-    void Start()
-    {
-        //if (instance == null)
-        //    instance = this;
-        //else
-        //{
-        //    Destroy(this);
-        //}           
-        //DontDestroyOnLoad(gameObject);
-        //return;
+    void Start()    {
        
     }
 
@@ -29,22 +20,14 @@ public class GameManagerScript : MonoBehaviour
         ESCKey();
     }
     public void LoadRandomScene()
-    {
-        var rng= Random.Range(1, 10);
-        StartCoroutine(LoadLevel(rng));
+    {        
+        StartCoroutine(LoadLevel(3));
     }
 
     public void FadeToLevel(int levelIndex)
     {
        GetComponent<Animator>().SetTrigger("FadeOut");
-    }
-
-    //public void OnFadeComplete()
-    //{
-    //    var rng = Random.Range(1, 10);
-    //    SceneManager.LoadScene("Level" + rng);
-    //}
-    
+    }    
 
    public void ESCKey()
     {
@@ -75,6 +58,7 @@ public class GameManagerScript : MonoBehaviour
     {
         StartCoroutine(LoadLevel(11));
     }
+
 
     public void EXITGAME()
     {

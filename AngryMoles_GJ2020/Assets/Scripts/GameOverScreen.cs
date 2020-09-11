@@ -7,11 +7,8 @@ public class GameOverScreen : MonoBehaviour
 {
     public void OnReplayClicked()
     {
-        var gameManagerObj = GameObject.FindGameObjectWithTag("GameManager");
-        if ( gameManagerObj != null)
-        {
-            gameManagerObj.GetComponent<GameManagerScript>().LoadDeathScreen();
-        }
+       
+        //GameManagerScript.Get().OnFadeComplete();
     }
 
     public void OnQuitClicked()
