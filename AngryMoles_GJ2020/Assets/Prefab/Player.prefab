@@ -406,8 +406,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479064724496078910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.09, z: 0}
-  m_LocalScale: {x: 2.86, y: 1.15, z: 1}
+  m_LocalPosition: {x: 0.03, y: 5.76, z: 0}
+  m_LocalScale: {x: 2.12355, y: 0.77625, z: 1}
   m_Children: []
   m_Father: {fileID: 1619448017792371628}
   m_RootOrder: 2
@@ -645,7 +645,7 @@ MonoBehaviour:
   timeScoreMultiplier: 1
   killScoreMultiplier: 5
   shieldReflectScoreMultiplier: 2
-  scoreText: {fileID: 405445033693865863}
+  scoreText: {fileID: 0}
 --- !u!114 &1619448017278948601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619448017792371629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 1.63, z: -2}
+  m_LocalPosition: {x: 0.01, y: 0.89, z: -2}
   m_LocalScale: {x: 0.5, y: 0.65, z: 1}
   m_Children:
   - {fileID: 269379188}
@@ -914,15 +914,15 @@ MonoBehaviour:
       innerMaxAngle: 75
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 20
+      outerMaxRadius: 10
       maxIntensity: 2
       color: {r: 1, g: 0.873141, b: 0.4009434, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 5
-      maxIntensity: 2
+      outerMaxRadius: 10
+      maxIntensity: 1.5
       color: {r: 1, g: 0.83839524, b: 0.3443396, a: 0}
     transitionDuration: 0.1
   shieldLightSettings:
@@ -930,7 +930,7 @@ MonoBehaviour:
       innerMaxAngle: 90
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 25
+      outerMaxRadius: 10
       maxIntensity: 3
       color: {r: 0.9709463, g: 1, b: 0.6650944, a: 0}
     point:
@@ -938,7 +938,7 @@ MonoBehaviour:
       outerMaxAngle: 360
       innerMaxRadius: 0
       outerMaxRadius: 5
-      maxIntensity: 3
+      maxIntensity: 2
       color: {r: 1, g: 0.96882296, b: 0.5518868, a: 0}
     transitionDuration: 0.1
   shieldEmptyLightSettings:
@@ -946,8 +946,8 @@ MonoBehaviour:
       innerMaxAngle: 75
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 2
-      maxIntensity: 0.5
+      outerMaxRadius: 0
+      maxIntensity: 0
       color: {r: 1, g: 0.7087828, b: 0, a: 0}
     point:
       innerMaxAngle: 360
@@ -970,7 +970,7 @@ MonoBehaviour:
       outerMaxAngle: 360
       innerMaxRadius: 0
       outerMaxRadius: 5
-      maxIntensity: 0.3
+      maxIntensity: 1
       color: {r: 0.3537736, g: 1, b: 0.3626044, a: 0}
     transitionDuration: 0.1
   point: {fileID: 340796631}
@@ -980,10 +980,10 @@ MonoBehaviour:
   maxShadowDuration: 3
   maxShieldDuration: 3
   shieldRechargeTime: 2
-  shieldRechargeInitialDelay: 1
+  shieldRechargeInitialDelay: 0
   shieldCollider: {fileID: 6720743749312438573}
-  shieldMinWidthPercent: 0.5
-  shieldMinDistPercent: 0.5
+  shieldMinWidthPercent: 0.75
+  shieldMinDistPercent: 0.75
   shieldTriggerFX: {fileID: 0}
   shieldEmptyFX: {fileID: 0}
   onCollideProjectileFX: {fileID: 0}
