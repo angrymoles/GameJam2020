@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6990918211238294058}
   - component: {fileID: 1841687811134421416}
   m_Layer: 8
-  m_Name: PF_HitWall
+  m_Name: PF_ShieldHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+      maxColor: {r: 0.9773756, g: 1, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4823,9 +4823,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7bb05a88896b3fb458beb9380abf042c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 795ad402fd8ee674ba4282c0dcb3c439, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.352
   m_Pitch: 1
   Loop: 0
   Mute: 0

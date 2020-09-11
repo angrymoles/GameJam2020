@@ -15,11 +15,11 @@ TagManager:
   - 
   - 
   - ShadowObstacle
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Wall
+  - Enemy
+  - Shield
+  - Bullet
   - 
   - 
   - 
