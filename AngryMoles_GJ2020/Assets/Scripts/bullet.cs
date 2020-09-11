@@ -23,7 +23,7 @@ public class bullet : MonoBehaviour
         // 9 is the Player Layer
         if (collision.gameObject.layer==9 && gameObject.layer == 13)
         {
-            if (collision.GetContact(0).collider.transform.gameObject.name == "Lamp")
+            if (collision.GetContact(0).collider.transform.gameObject.name == "Shield")
             {//Barrier
                 gameObject.layer = 15;
                 myLight.GetComponent<Light2D>().color = Color.blue;
