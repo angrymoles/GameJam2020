@@ -12,7 +12,7 @@ public class PlayerAction : MonoBehaviour
         E_SHIELD,
         E_DEAD,
     }
-
+    public Sprite[] playerSprites;
     public Lamp lamp;
     public PolygonCollider2D bodyCollider;
     //private PLAYER_STATE playerState;
@@ -33,6 +33,7 @@ public class PlayerAction : MonoBehaviour
         if (leftDown && rightDown )
         {
             ActivateBomb();
+
         }
         else if (leftDown)
         {
@@ -60,11 +61,13 @@ public class PlayerAction : MonoBehaviour
             {
                 lamp.ActivateShadow();
                 bodyCollider.enabled = false;
+                GetComponent<PlayerMovement>().moveSpeed = GetComponent<PlayerMovement>().darkMovespeed;
             }
             else
             {
                 lamp.DeactivateShadow();
                 bodyCollider.enabled = true;
+                GetComponent<PlayerMovement>().moveSpeed = GetComponent<PlayerMovement>().lightMovespeed; 
             }
         }
     }

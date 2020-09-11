@@ -9,7 +9,7 @@ public class Player : Character
     
 
     void Start()
-    {
+    {       
         playerMovement.moveSpeed = movementSpeed;        
         currentHealth = MaxHealth;
     }

@@ -6,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector]
     public float moveSpeed = 5f;
+    public float lightMovespeed;
+    public float darkMovespeed;
+    
    
     public float pointerDist = 5f;
 
@@ -57,4 +60,5 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
         rigidBodyLamp.rotation = angle;
     }
+
 }

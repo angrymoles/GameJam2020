@@ -149,54 +149,7 @@ public class Lamp : MonoBehaviour
         sprite.enabled = false;
     }
 
-    private void UpdateShield()
-    {
-        if ( shadowActive )
-        {
-            elapsedShadowTime += Time.deltaTime;
-            if ( elapsedShadowTime > maxShadowDuration)
-            {
-                DeactivateShadow();
-            }
-        }
-
-        if ( shieldActive)
-        {
-            elapsedShieldUpTime += Time.deltaTime;
-            if(transitionTiming == targetLightSettings.transitionDuration )
-            {
-                Debug.Log("Shield degradation beginning");
-                BeginShieldDegradation();
-            }
-
-            currentCapacity -= Time.deltaTime / localMaxShieldDuration;
-            shieldCollider.size.Set(Mathf.Lerp(shieldMaxWidth, shieldMinWidth, currentCapacity), shieldCollider.size.y);
-            if ( currentCapacity <= 0 )
-            {
-                // shield burned out
-                DeactivateShield();
-            }
-        }
-        else if ( !shieldActive && !shadowActive )
-        {
-            elapsedShieldDownTime += Time.deltaTime;
-            // regen shield
-            if (elapsedShieldDownTime < shieldRechargeInitialDelay)
-            {
-                return;
-            }
-            else
-            {
-                currentCapacity = elapsedShieldDownTime / (shieldRechargeTime + shieldRechargeInitialDelay);
-            }
-
-            if ( currentCapacity > 1 )
-            {
-                currentCapacity = 1;
-                elapsedShieldUpTime = 0;
-            }
-        }
-    }
+  
 
     void Update()
     {
@@ -211,6 +164,55 @@ public class Lamp : MonoBehaviour
         }
         UpdateShield();
         UpdateLight();
+    }
+
+    private void UpdateShield()
+    {
+        if (shadowActive)
+        {
+            elapsedShadowTime += Time.deltaTime;
+            if (elapsedShadowTime > maxShadowDuration)
+            {
+                DeactivateShadow();
+            }
+        }
+
+        if (shieldActive)
+        {
+            elapsedShieldUpTime += Time.deltaTime;
+            if (transitionTiming == targetLightSettings.transitionDuration)
+            {
+                Debug.Log("Shield degradation beginning");
+                BeginShieldDegradation();
+            }
+
+            currentCapacity -= Time.deltaTime / localMaxShieldDuration;
+            shieldCollider.size.Set(Mathf.Lerp(shieldMaxWidth, shieldMinWidth, currentCapacity), shieldCollider.size.y);
+            if (currentCapacity <= 0)
+            {
+                // shield burned out
+                DeactivateShield();
+            }
+        }
+        else if (!shieldActive && !shadowActive)
+        {
+            elapsedShieldDownTime += Time.deltaTime;
+            // regen shield
+            if (elapsedShieldDownTime < shieldRechargeInitialDelay)
+            {
+                return;
+            }
+            else
+            {
+                currentCapacity = elapsedShieldDownTime / (shieldRechargeTime + shieldRechargeInitialDelay);
+            }
+
+            if (currentCapacity > 1)
+            {
+                currentCapacity = 1;
+                elapsedShieldUpTime = 0;
+            }
+        }
     }
 
     public void UpdateLight()
