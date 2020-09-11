@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float lightMovespeed;
     public float darkMovespeed;
     private Animator anim;
-
+    public bool enableMouseFollow = false;
 
     public float pointerDist = 5f;
 
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
             rigidBodyPlayer.MovePosition(rigidBodyPlayer.position + movement * moveSpeed * Time.fixedDeltaTime * 5);
             rigidBodyLamp.MovePosition(rigidBodyPlayer.position + movement * moveSpeed * Time.fixedDeltaTime * 5);
         }
-        else
+        else if(enableMouseFollow)
         {
             Vector2 frameTargetPos = (mousePos - rigidBodyPlayer.position);
             float dist = frameTargetPos.sqrMagnitude;
