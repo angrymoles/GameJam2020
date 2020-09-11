@@ -529,6 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04e50b8184490743adc290fb0a642d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lamp: {fileID: 1619448017792371617}
 --- !u!1 &1563977783473095514
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +654,7 @@ MonoBehaviour:
   moveSpeed: 1
   lightMovespeed: 0.5
   darkMovespeed: 1.5
+  enableMouseFollow: 0
   pointerDist: 1
   rigidBodyLamp: {fileID: 1797420278}
   rigidBodyPlayer: {fileID: 1619448017278948550}
