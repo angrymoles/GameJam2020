@@ -60,13 +60,15 @@ public class PlayerAction : MonoBehaviour
             if (shadowActive)
             {
                 lamp.ActivateShadow();
-                bodyCollider.enabled = false;
+                gameObject.layer = 14;
+                //bodyCollider.enabled = false;
                 GetComponent<PlayerMovement>().moveSpeed = GetComponent<PlayerMovement>().darkMovespeed;
             }
             else
             {
                 lamp.DeactivateShadow();
-                bodyCollider.enabled = true;
+                gameObject.layer = 9;
+                //bodyCollider.enabled = true;
                 GetComponent<PlayerMovement>().moveSpeed = GetComponent<PlayerMovement>().lightMovespeed; 
             }
         }

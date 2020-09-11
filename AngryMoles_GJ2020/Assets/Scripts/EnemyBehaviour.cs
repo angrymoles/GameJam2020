@@ -34,6 +34,11 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+        {
+            return;
+        }
+
         targetDirection = target.position - transform.position;
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg+90;
         rb.rotation = angle;
@@ -60,6 +65,11 @@ public class EnemyBehaviour : MonoBehaviour
     }
     void Shoot()
     {
+        if (target == null)
+        {
+            return;
+        }
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         Vector3 dirction = target.position - firePoint.position;

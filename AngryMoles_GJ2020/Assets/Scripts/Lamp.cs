@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+public enum LampFXType
+{
+    LampFX_Activate,
+    LampFX_ShieldEmpty,
+    LampFX_ShieldHit,
+}
 
 [System.Serializable]
 public class LightPair
@@ -12,7 +18,14 @@ public class LightPair
     public LightSettings cone;
     public LightSettings point;
     public float transitionDuration = 1.0f;
-    public LightPair Clone() { return (LightPair)this.MemberwiseClone(); }
+    public LightPair Clone()
+    {
+        var clone = new LightPair();
+        clone.cone = cone.Clone();
+        clone.point = point.Clone();
+        clone.transitionDuration = transitionDuration;
+        return clone;
+    }
 }
 [System.Serializable]
 public class LightSettings
@@ -57,6 +70,7 @@ public class Lamp : MonoBehaviour
     //private bool shieldBurnedOut = false;
 
     private LightPair currentLightSettings;
+    private LightPair oldLightSettings;
     private LightPair targetLightSettings;
 
    
@@ -70,13 +84,15 @@ public class Lamp : MonoBehaviour
     private float shieldMaxDist;
     private float shieldMinDist;
     public float shieldMinDistPercent = 0.5f;
-    public GameObject shieldTriggerVFX;
-    public GameObject shieldEmptyVFX;
+    public GameObject shieldTriggerFX;
+    public GameObject shieldEmptyFX;
+    public GameObject onCollideProjectileFX;
 
     // Start is called before the first frame update
     void Start()
     {
         currentCapacity = maxCapacity;
+        oldLightSettings = defaultLightSettings.Clone();
         currentLightSettings = defaultLightSettings.Clone();
         targetLightSettings = defaultLightSettings.Clone();        
         shieldCollider.enabled = false;
@@ -99,8 +115,24 @@ public class Lamp : MonoBehaviour
     }
 
     // in case we want to do something if the shield is hit by bullets
-    void OnCollisionEnter2D(Collision2D collision)
+    public void PlayFX( Vector3 position, LampFXType lampFXType )
     {
+        GameObject prefabToPlay;
+        switch( lampFXType)
+        {
+            case LampFXType.LampFX_Activate:
+                prefabToPlay = shieldTriggerFX;
+                break;
+            case LampFXType.LampFX_ShieldEmpty:
+                prefabToPlay = shieldEmptyFX;
+                break;
+            default:
+                prefabToPlay = onCollideProjectileFX;
+                break;
+        }
+
+        GameObject effect = Instantiate(prefabToPlay, position, Quaternion.identity);
+        Destroy(effect, 2f);
     }
 
     private bool CanActivate()
@@ -112,9 +144,13 @@ public class Lamp : MonoBehaviour
     {
         if ( CanActivate() )
         {
+            oldLightSettings = currentLightSettings.Clone();
             targetLightSettings = shadowLightSettings.Clone();
             transitionTiming = 0f;
-            EmptyShield();
+            if (shieldActive)
+            {
+                DeactivateShield();
+            }
             shadowActive = true;
             elapsedShadowTime = 0f;
         }
@@ -122,8 +158,12 @@ public class Lamp : MonoBehaviour
     
     public void DeactivateShadow()
     {
+        DeactivateShield();
         currentCapacity = 0;
         elapsedShadowTime = 0;
+        oldLightSettings = shieldEmptyLightSettings.Clone();
+        currentLightSettings = shieldEmptyLightSettings.Clone();
+        targetLightSettings = defaultLightSettings.Clone();
         ReturnToDefault();
     }
 
@@ -152,20 +192,21 @@ public class Lamp : MonoBehaviour
             shieldCollider.enabled = true;
             sprite.enabled = true;
             localMaxShieldDuration = maxShieldDuration * currentCapacity / maxCapacity;
+            oldLightSettings = currentLightSettings.Clone();
             targetLightSettings = shieldEmptyLightSettings.Clone();
             targetLightSettings.transitionDuration = localMaxShieldDuration;
             elapsedShieldDownTime = 0f;
             
-            if ( shieldTriggerVFX != null)
+            if ( shieldTriggerFX != null)
             {
-                ParticleSystem particleSystem = shieldTriggerVFX.GetComponent<ParticleSystem>();
-                particleSystem.Play();
+                PlayFX(transform.position, LampFXType.LampFX_Activate);
             }
         }
     }
 
     private void BeginShieldDegradation()
     {
+        oldLightSettings = currentLightSettings.Clone();
         targetLightSettings = shieldEmptyLightSettings.Clone();
         targetLightSettings.transitionDuration = maxShieldDuration;
         transitionTiming = 0f;
@@ -174,6 +215,7 @@ public class Lamp : MonoBehaviour
     // after burning the shield out?
     private void ReturnToDefault()
     {
+        oldLightSettings = currentLightSettings.Clone();
         targetLightSettings = defaultLightSettings.Clone();
         transitionTiming = 0f;
         shadowActive = false;
@@ -192,10 +234,13 @@ public class Lamp : MonoBehaviour
         shieldActive = false;
         shieldCollider.enabled = false;
         sprite.enabled = false;
-        if ( shieldEmptyVFX != null )
+        oldLightSettings = currentLightSettings.Clone();
+        targetLightSettings = defaultLightSettings.Clone();
+        targetLightSettings.transitionDuration = (1 - currentCapacity) / maxCapacity * (shieldRechargeTime + shieldRechargeInitialDelay);
+        transitionTiming = 0f;
+        if ( shieldEmptyFX != null )
         {
-            ParticleSystem particleSystem = shieldEmptyVFX.GetComponent<ParticleSystem>();
-            particleSystem.Play();
+            PlayFX(transform.position, LampFXType.LampFX_ShieldEmpty);
         }
     }
 
@@ -275,14 +320,18 @@ public class Lamp : MonoBehaviour
 
     public void UpdateLight()
     {
-        float percentComplete = transitionTiming / targetLightSettings.transitionDuration;
+        float percentComplete = (1 - currentCapacity) / maxCapacity;  //transitionTiming / targetLightSettings.transitionDuration;
+        if ( !shieldActive )
+        {
+            percentComplete = currentCapacity / maxCapacity;
+        }
 
-        currentLightSettings.cone.innerMaxAngle = Mathf.Lerp(currentLightSettings.cone.innerMaxAngle, targetLightSettings.cone.innerMaxAngle, percentComplete);
-        currentLightSettings.cone.outerMaxAngle = Mathf.Lerp(currentLightSettings.cone.outerMaxAngle, targetLightSettings.cone.outerMaxAngle, percentComplete);
-        currentLightSettings.cone.innerMaxRadius = Mathf.Lerp(currentLightSettings.cone.innerMaxRadius, targetLightSettings.cone.innerMaxRadius, percentComplete);
-        currentLightSettings.cone.outerMaxRadius = Mathf.Lerp(currentLightSettings.cone.outerMaxRadius, targetLightSettings.cone.outerMaxRadius, percentComplete);
-        currentLightSettings.cone.maxIntensity = Mathf.Lerp(currentLightSettings.cone.maxIntensity, targetLightSettings.cone.maxIntensity, percentComplete);
-        currentLightSettings.cone.color = Color.Lerp(currentLightSettings.cone.color, targetLightSettings.cone.color, percentComplete);
+        currentLightSettings.cone.innerMaxAngle = Mathf.Lerp(oldLightSettings.cone.innerMaxAngle, targetLightSettings.cone.innerMaxAngle, percentComplete);
+        currentLightSettings.cone.outerMaxAngle = Mathf.Lerp(oldLightSettings.cone.outerMaxAngle, targetLightSettings.cone.outerMaxAngle, percentComplete);
+        currentLightSettings.cone.innerMaxRadius = Mathf.Lerp(oldLightSettings.cone.innerMaxRadius, targetLightSettings.cone.innerMaxRadius, percentComplete);
+        currentLightSettings.cone.outerMaxRadius = Mathf.Lerp(oldLightSettings.cone.outerMaxRadius, targetLightSettings.cone.outerMaxRadius, percentComplete);
+        currentLightSettings.cone.maxIntensity = Mathf.Lerp(oldLightSettings.cone.maxIntensity, targetLightSettings.cone.maxIntensity, percentComplete);
+        currentLightSettings.cone.color = Color.Lerp(oldLightSettings.cone.color, targetLightSettings.cone.color, percentComplete);
 
         cone.pointLightInnerAngle = currentLightSettings.cone.innerMaxAngle;
         cone.pointLightOuterAngle = currentLightSettings.cone.outerMaxAngle;
@@ -291,12 +340,12 @@ public class Lamp : MonoBehaviour
         cone.intensity = currentLightSettings.cone.maxIntensity;
         cone.color = currentLightSettings.cone.color;
 
-        currentLightSettings.point.innerMaxAngle = Mathf.Lerp(currentLightSettings.point.innerMaxAngle, targetLightSettings.point.innerMaxAngle, percentComplete);
-        currentLightSettings.point.outerMaxAngle = Mathf.Lerp(currentLightSettings.point.outerMaxAngle, targetLightSettings.point.outerMaxAngle, percentComplete);
-        currentLightSettings.point.innerMaxRadius = Mathf.Lerp(currentLightSettings.point.innerMaxRadius, targetLightSettings.point.innerMaxRadius, percentComplete);
-        currentLightSettings.point.outerMaxRadius = Mathf.Lerp(currentLightSettings.point.outerMaxRadius, targetLightSettings.point.outerMaxRadius, percentComplete);
-        currentLightSettings.point.maxIntensity = Mathf.Lerp(currentLightSettings.point.maxIntensity, targetLightSettings.point.maxIntensity, percentComplete);
-        currentLightSettings.point.color = Color.Lerp(currentLightSettings.point.color, targetLightSettings.point.color, percentComplete);
+        currentLightSettings.point.innerMaxAngle = Mathf.Lerp(oldLightSettings.point.innerMaxAngle, targetLightSettings.point.innerMaxAngle, percentComplete);
+        currentLightSettings.point.outerMaxAngle = Mathf.Lerp(oldLightSettings.point.outerMaxAngle, targetLightSettings.point.outerMaxAngle, percentComplete);
+        currentLightSettings.point.innerMaxRadius = Mathf.Lerp(oldLightSettings.point.innerMaxRadius, targetLightSettings.point.innerMaxRadius, percentComplete);
+        currentLightSettings.point.outerMaxRadius = Mathf.Lerp(oldLightSettings.point.outerMaxRadius, targetLightSettings.point.outerMaxRadius, percentComplete);
+        currentLightSettings.point.maxIntensity = Mathf.Lerp(oldLightSettings.point.maxIntensity, targetLightSettings.point.maxIntensity, percentComplete);
+        currentLightSettings.point.color = Color.Lerp(oldLightSettings.point.color, targetLightSettings.point.color, percentComplete);
 
         point.pointLightInnerAngle = currentLightSettings.point.innerMaxAngle;
         point.pointLightOuterAngle = currentLightSettings.point.outerMaxAngle;

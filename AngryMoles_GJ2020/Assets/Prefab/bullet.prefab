@@ -213,9 +213,7 @@ MonoBehaviour:
   - {fileID: 1793710215769106762, guid: b1629e5de440bd74e808c22f73b637f5, type: 3}
   - {fileID: 1793710215769106762, guid: 015f07d111988ec4cb79e227fecc9055, type: 3}
   destroyHitEffectTime: 1
-  lifeTime: 30
   damage: 1
-  bulletSpeed: 4
   myLight: {fileID: 6945221976491726979}
 --- !u!95 &1318548835
 Animator:
