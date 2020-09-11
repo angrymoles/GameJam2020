@@ -8,8 +8,9 @@ public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript instance;
     public float transitionTime = 1f;
-     
     
+    public static GameManagerScript Get() { return instance; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,11 +36,8 @@ public class GameManagerScript : MonoBehaviour
 
     public void LoadMenu()
     {
-        
-        SceneManager.LoadScene("Level0");
+        OnFadeComplete();
     }
-
-
 
     public void FadeToLevel(int levelIndex)
     {

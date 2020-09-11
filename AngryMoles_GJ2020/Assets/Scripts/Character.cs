@@ -22,22 +22,22 @@ public class Character : MonoBehaviour
     }
 
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        var collidedObject = collision.gameObject;
-        var bullet = collidedObject.GetComponent<bullet>();
-        if (bullet)
-        {
-            TakeDamage(bullet.damage);
-        }
-    }
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    var collidedObject = collision.gameObject;
+    //    var bullet = collidedObject.GetComponent<bullet>();
+    //    if (bullet)
+    //    {
+    //        TakeDamage(bullet.damage);
+    //    }
+    //}
 
-    public void TakeDamage(float damageAmount)
-    {
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
+    //public void TakeDamage(float damageAmount)
+    //{
+    //    currentHealth -= damageAmount;
+    //    if (currentHealth <= 0)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

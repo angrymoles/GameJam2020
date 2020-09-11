@@ -638,6 +638,9 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerAction: {fileID: 1619448017278948600}
   playerMovement: {fileID: 1619448017278948601}
+  deathFXPrefab: {fileID: 1793710215769106762, guid: c2941cbff3b32444fb63807e49592877,
+    type: 3}
+  deathSprite: {fileID: 21300000, guid: 5715f1fe71540a5458b28a0594e4a603, type: 3}
   HP: 3
 --- !u!114 &1619448017278948601
 MonoBehaviour:
