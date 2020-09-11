@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+public enum LampFXType
+{
+    LampFX_Activate,
+    LampFX_ShieldEmpty,
+    LampFX_ShieldHit,
+}
 
 [System.Serializable]
 public class LightPair
@@ -109,8 +115,24 @@ public class Lamp : MonoBehaviour
     }
 
     // in case we want to do something if the shield is hit by bullets
-    void OnCollisionEnter2D(Collision2D collision)
+    public void PlayFX( Vector3 position, LampFXType lampFXType )
     {
+        GameObject prefabToPlay;
+        switch( lampFXType)
+        {
+            case LampFXType.LampFX_Activate:
+                prefabToPlay = shieldTriggerFX;
+                break;
+            case LampFXType.LampFX_ShieldEmpty:
+                prefabToPlay = shieldEmptyFX;
+                break;
+            default:
+                prefabToPlay = onCollideProjectileFX;
+                break;
+        }
+
+        GameObject effect = Instantiate(prefabToPlay, position, Quaternion.identity);
+        Destroy(effect, 2f);
     }
 
     private bool CanActivate()
@@ -125,7 +147,10 @@ public class Lamp : MonoBehaviour
             oldLightSettings = currentLightSettings.Clone();
             targetLightSettings = shadowLightSettings.Clone();
             transitionTiming = 0f;
-            EmptyShield();
+            if (shieldActive)
+            {
+                DeactivateShield();
+            }
             shadowActive = true;
             elapsedShadowTime = 0f;
         }
@@ -133,8 +158,12 @@ public class Lamp : MonoBehaviour
     
     public void DeactivateShadow()
     {
+        DeactivateShield();
         currentCapacity = 0;
         elapsedShadowTime = 0;
+        oldLightSettings = shieldEmptyLightSettings.Clone();
+        currentLightSettings = shieldEmptyLightSettings.Clone();
+        targetLightSettings = defaultLightSettings.Clone();
         ReturnToDefault();
     }
 
@@ -170,8 +199,7 @@ public class Lamp : MonoBehaviour
             
             if ( shieldTriggerFX != null)
             {
-                GameObject effect = Instantiate(shieldTriggerFX, transform.position, Quaternion.identity);
-                Destroy(effect, 2f);
+                PlayFX(transform.position, LampFXType.LampFX_Activate);
             }
         }
     }
@@ -212,8 +240,7 @@ public class Lamp : MonoBehaviour
         transitionTiming = 0f;
         if ( shieldEmptyFX != null )
         {
-            GameObject effect = Instantiate(shieldEmptyFX, transform.position, Quaternion.identity);
-            Destroy(effect, 2f);
+            PlayFX(transform.position, LampFXType.LampFX_ShieldEmpty);
         }
     }
 

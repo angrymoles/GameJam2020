@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 5422125536457445507}
   - component: {fileID: 156543892997413831}
   - component: {fileID: 6720743749312438573}
+  - component: {fileID: 5448335888152313741}
   m_Layer: 12
   m_Name: Shield
   m_TagString: Untagged
@@ -516,6 +517,18 @@ PolygonCollider2D:
       - {x: -2.58, y: -0.62}
       - {x: -0.12, y: -7.18}
       - {x: 2.52, y: -0.35}
+--- !u!114 &5448335888152313741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479064724496078910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f04e50b8184490743adc290fb0a642d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1563977783473095514
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,10 +975,9 @@ MonoBehaviour:
   shieldCollider: {fileID: 6720743749312438573}
   shieldMinWidthPercent: 0.5
   shieldMinDistPercent: 0.5
-  shieldTriggerVFX: {fileID: 7843256481767067466, guid: 31154b72da78c0a44beb2462e653cd9d,
-    type: 3}
-  shieldEmptyVFX: {fileID: 7843256481767067466, guid: 239ce8f4d67d1674ca1fdbabbf7346d5,
-    type: 3}
+  shieldTriggerFX: {fileID: 0}
+  shieldEmptyFX: {fileID: 0}
+  onCollideProjectileFX: {fileID: 0}
 --- !u!61 &3659680490197567419
 BoxCollider2D:
   m_ObjectHideFlags: 0
