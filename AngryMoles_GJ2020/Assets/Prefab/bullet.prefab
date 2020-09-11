@@ -215,7 +215,7 @@ MonoBehaviour:
   destroyHitEffectTime: 1
   lifeTime: 30
   damage: 1
-  bulletSpeed: 2
+  bulletSpeed: 4
   myLight: {fileID: 6945221976491726979}
 --- !u!95 &1318548835
 Animator:
