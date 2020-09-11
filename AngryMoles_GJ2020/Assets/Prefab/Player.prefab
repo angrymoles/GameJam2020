@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 3
-  movementSpeed: 0.5
+  movementSpeed: 1
   playerAction: {fileID: 1619448017278948600}
   playerMovement: {fileID: 1619448017278948601}
   HP: 3
