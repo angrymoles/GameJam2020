@@ -115,7 +115,7 @@ public class Lamp : MonoBehaviour
             transitionTiming = 0f;
             shieldActive = true;
             shieldCollider.enabled = true;
-            //sprite.enabled = true;
+            sprite.enabled = true;
             localMaxShieldDuration = maxShieldDuration * currentCapacity / maxCapacity;
         }
     }
