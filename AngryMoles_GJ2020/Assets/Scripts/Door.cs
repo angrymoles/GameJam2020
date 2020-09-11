@@ -36,6 +36,11 @@ public class Door : MonoBehaviour
 
     public void SpawnEnemey()
     {
+        if (FindObjectOfType<Player>() == null)
+        {
+            return;
+        }
+
         if (target == null)
         {
             return;
