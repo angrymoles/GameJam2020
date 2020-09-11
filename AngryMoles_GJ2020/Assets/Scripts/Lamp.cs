@@ -23,7 +23,7 @@ public class LightSettings
     public float outerMaxRadius = 5.0f;
     [Range(0,3f)]
     public float maxIntensity = 2.0f;
-    public float maxBarrierScale = 10.0f;
+    public Color color;
 
     public LightSettings Clone() { return (LightSettings)this.MemberwiseClone(); }
 }
@@ -233,23 +233,27 @@ public class Lamp : MonoBehaviour
         currentLightSettings.cone.innerMaxRadius = Mathf.Lerp(currentLightSettings.cone.innerMaxRadius, targetLightSettings.cone.innerMaxRadius, percentComplete);
         currentLightSettings.cone.outerMaxRadius = Mathf.Lerp(currentLightSettings.cone.outerMaxRadius, targetLightSettings.cone.outerMaxRadius, percentComplete);
         currentLightSettings.cone.maxIntensity = Mathf.Lerp(currentLightSettings.cone.maxIntensity, targetLightSettings.cone.maxIntensity, percentComplete);
+        currentLightSettings.cone.color = Color.Lerp(currentLightSettings.cone.color, targetLightSettings.cone.color, percentComplete);
 
         cone.pointLightInnerAngle = currentLightSettings.cone.innerMaxAngle;
         cone.pointLightOuterAngle = currentLightSettings.cone.outerMaxAngle;
         cone.pointLightInnerRadius = currentLightSettings.cone.innerMaxRadius;
         cone.pointLightOuterRadius = currentLightSettings.cone.outerMaxRadius;
         cone.intensity = currentLightSettings.cone.maxIntensity;
+        cone.color = currentLightSettings.cone.color;
 
         currentLightSettings.point.innerMaxAngle = Mathf.Lerp(currentLightSettings.point.innerMaxAngle, targetLightSettings.point.innerMaxAngle, percentComplete);
         currentLightSettings.point.outerMaxAngle = Mathf.Lerp(currentLightSettings.point.outerMaxAngle, targetLightSettings.point.outerMaxAngle, percentComplete);
         currentLightSettings.point.innerMaxRadius = Mathf.Lerp(currentLightSettings.point.innerMaxRadius, targetLightSettings.point.innerMaxRadius, percentComplete);
         currentLightSettings.point.outerMaxRadius = Mathf.Lerp(currentLightSettings.point.outerMaxRadius, targetLightSettings.point.outerMaxRadius, percentComplete);
         currentLightSettings.point.maxIntensity = Mathf.Lerp(currentLightSettings.point.maxIntensity, targetLightSettings.point.maxIntensity, percentComplete);
+        currentLightSettings.point.color = Color.Lerp(currentLightSettings.point.color, targetLightSettings.point.color, percentComplete);
 
         point.pointLightInnerAngle = currentLightSettings.point.innerMaxAngle;
         point.pointLightOuterAngle = currentLightSettings.point.outerMaxAngle;
         point.pointLightInnerRadius = currentLightSettings.point.innerMaxRadius;
         point.pointLightOuterRadius = currentLightSettings.point.outerMaxRadius;
         point.intensity = currentLightSettings.point.maxIntensity;
+        point.color = currentLightSettings.point.color;
     }
 }
