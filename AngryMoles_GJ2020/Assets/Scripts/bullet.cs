@@ -9,11 +9,11 @@ public class bullet : MonoBehaviour
     public GameObject[] hitEffect;
     public float destroyHitEffectTime = 2f;
     public float lifeTime = 300f;
-    public float damage = 1f;
+    public int damage = 1;
     public float bulletSpeed = 5f;
     private Rigidbody2D rb;
     public GameObject myLight;
-   
+
     //public UnityEngine.Experimental.Rendering.Universal.Light2D attachedLight;
 
     private float timeSpan = 0f;
@@ -23,8 +23,20 @@ public class bullet : MonoBehaviour
         // 9 is the Player Layer
         if (collision.gameObject.layer==9)
         {
+            if (collision.GetContact(0).collider.transform.gameObject.name == "Lamp")
+            {
+                return;
+            }
+
             GameObject effect = Instantiate(hitEffect[0], transform.position, Quaternion.identity);
             Destroy(effect, destroyHitEffectTime);
+
+            Player player = collision.gameObject.GetComponent<Player>();
+            if (player == null)
+            {
+                return;
+            }
+            player.TakeDamage(damage);
             Destroy(gameObject);
         }
         //10 is the wall layer
@@ -32,19 +44,35 @@ public class bullet : MonoBehaviour
         {
             GameObject effect = Instantiate(hitEffect[1], transform.position, Quaternion.identity);
             Destroy(effect, destroyHitEffectTime);
+            Destroy(gameObject);
         }
 
+        //11 Enemy
         if (collision.gameObject.layer == 11)
         {
             GameObject effect = Instantiate(hitEffect[2], transform.position, Quaternion.identity);
             Destroy(effect, destroyHitEffectTime);
+
+            Enemy enemey = collision.gameObject.GetComponent<Enemy>();
+            if (enemey == null)
+            {
+                return;
+            }
+            enemey.TakeDamage(damage);
             Destroy(gameObject);
         }
-        if (collision.gameObject.layer == 12|| collision.gameObject.layer == 13)
+
+        //12 shield 13 bullet
+        if (collision.gameObject.layer == 12)
         {
             GameObject effect = Instantiate(hitEffect[3], transform.position, Quaternion.identity);
             Destroy(effect, destroyHitEffectTime);
-            
+
+        }
+
+        if (collision.gameObject.layer == 13)
+        {
+            return;
         }
 
 
@@ -55,27 +83,13 @@ public class bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
-        bulletSpeed = Random.Range(3, 12);
         myLight.GetComponent<Light2D>().color = new Color(Random.Range(0F, 1F), Random.Range(0, 1F), Random.Range(0, 1F));
-        //timeSpan = 0.0f;
-
-        Debug.Log(bulletSpeed);
-        GetComponent<Rigidbody2D>().AddForce(transform.forward * bulletSpeed);
-
         GetComponent<SpriteRenderer>().color=Random.ColorHSV();
-        
-
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector3.up;
-        
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         //LifeTimeProcess();
     }
 
