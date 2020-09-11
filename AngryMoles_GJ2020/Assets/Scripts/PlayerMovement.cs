@@ -6,9 +6,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector]
     public float moveSpeed = 5f;
-    public float dashSpeed = 4f;
+   
     public float pointerDist = 5f;
-    public Rigidbody2D rigidBody;
+
+    [SerializeField]
+    public Rigidbody2D rigidBodyLamp;
+    [SerializeField]
+    public Rigidbody2D rigidBodyPlayer;
     private Camera mainCamera;
 
     Vector2 movement;
@@ -39,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 frameTargetPos = (mousePos - rigidBody.position);
+        Vector2 frameTargetPos = (mousePos - rigidBodyPlayer.position);
         float dist = frameTargetPos.sqrMagnitude;
         if ( pointerDist * pointerDist > dist )
         {
@@ -47,9 +51,10 @@ public class PlayerMovement : MonoBehaviour
         }
         frameTargetPos.Normalize();
         frameTargetPos = frameTargetPos * moveSpeed * Time.fixedDeltaTime * 5;
-        rigidBody.MovePosition(rigidBody.position + frameTargetPos);
-        Vector2 lookDir = mousePos - rigidBody.position;
+        rigidBodyPlayer.MovePosition(rigidBodyPlayer.position + frameTargetPos);
+        rigidBodyLamp.MovePosition(rigidBodyPlayer.position + frameTargetPos);
+        Vector2 lookDir = mousePos - rigidBodyLamp.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
-        rigidBody.rotation = angle;
+        rigidBodyLamp.rotation = angle;
     }
 }

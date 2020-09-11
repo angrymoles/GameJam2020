@@ -55,6 +55,7 @@ public class Lamp : MonoBehaviour
     private LightPair currentLightSettings;
     private LightPair targetLightSettings;
 
+   
     private BoxCollider2D shieldCollider;
     private SpriteRenderer sprite;
     private float shieldMaxWidth;

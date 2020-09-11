@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269379186}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -43.625336, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1619448017792371628}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
-  m_Color: {r: 1, g: 0.8200293, b: 0.5137255, a: 1}
+  m_Color: {r: 1, g: 0.8196079, b: 0.5137255, a: 1}
   m_Intensity: 2
   m_LightVolumeOpacity: 0.15
   m_ApplyToSortingLayers: b52fd6c8000000000305f072
@@ -96,8 +96,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340796629}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -43.625336, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1619448017792371628}
@@ -144,7 +144,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1 &1346112351739093373
+--- !u!1 &529541393
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,27 +152,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1530059134075320597}
+  - component: {fileID: 529541394}
   m_Layer: 0
-  m_Name: CameraScriptHelper
+  m_Name: CameraOrientationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1530059134075320597
+--- !u!4 &529541394
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346112351739093373}
+  m_GameObject: {fileID: 529541393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -193, z: 0}
+  m_LocalPosition: {x: 0, y: 3.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1619448017792371628}
-  m_RootOrder: 2
+  m_Father: {fileID: 1619448017278948551}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1619448017278948549
 GameObject:
@@ -207,7 +207,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1619448017792371628}
+  - {fileID: 529541394}
+  - {fileID: 1871373239819846257}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -223,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b83cf5aba21ca429978434fa48a768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 1
-  movementSpeed: 1
+  MaxHealth: 3
+  movementSpeed: 0.5
   playerAction: {fileID: 1619448017278948600}
   playerMovement: {fileID: 1619448017278948601}
 --- !u!114 &1619448017278948601
@@ -382,16 +383,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619448017792371629}
-  m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: -0.46, y: -0.455, z: -2}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 2.34, z: -2}
   m_LocalScale: {x: 0.28630215, y: 0.03140377, z: 0.28630215}
   m_Children:
   - {fileID: 269379188}
   - {fileID: 340796630}
-  - {fileID: 1530059134075320597}
-  m_Father: {fileID: 1619448017278948551}
+  m_Father: {fileID: 1871373239819846257}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1619448017792371631
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -431,15 +431,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6b19200def2b5a648ae8acf4ca38a903, type: 3}
-  m_Color: {r: 1, g: 0.9632401, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 00b6a59e1735cda489a4fc29d64ae25a, type: 3}
+  m_Color: {r: 1, g: 0.76251894, b: 0.3254717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.84, y: 10.17}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1619448017792371617
@@ -456,74 +456,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultLightSettings:
     cone:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
+      innerMaxAngle: 75
+      outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 5
+      outerMaxRadius: 20
       maxIntensity: 2
       maxBarrierScale: 10
     point:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
-      innerMaxRadius: 1
+      innerMaxAngle: 360
+      outerMaxAngle: 360
+      innerMaxRadius: 0
       outerMaxRadius: 5
       maxIntensity: 2
       maxBarrierScale: 10
-    transitionDuration: 0.7
+    transitionDuration: 2
   shieldLightSettings:
     cone:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
+      innerMaxAngle: 90
+      outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 5
-      maxIntensity: 2
+      outerMaxRadius: 25
+      maxIntensity: 3
       maxBarrierScale: 10
     point:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
-      innerMaxRadius: 1
+      innerMaxAngle: 360
+      outerMaxAngle: 360
+      innerMaxRadius: 0
       outerMaxRadius: 5
-      maxIntensity: 2
+      maxIntensity: 3
       maxBarrierScale: 10
-    transitionDuration: 0.7
+    transitionDuration: 2
   shieldEmptyLightSettings:
     cone:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
+      innerMaxAngle: 75
+      outerMaxAngle: 360
       innerMaxRadius: 1
       outerMaxRadius: 5
-      maxIntensity: 2
+      maxIntensity: 0.5
       maxBarrierScale: 10
     point:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
-      innerMaxRadius: 1
+      innerMaxAngle: 360
+      outerMaxAngle: 360
+      innerMaxRadius: 0
       outerMaxRadius: 5
-      maxIntensity: 2
+      maxIntensity: 0.5
       maxBarrierScale: 10
     transitionDuration: 1
   shadowLightSettings:
     cone:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
-      innerMaxRadius: 1
-      outerMaxRadius: 5
-      maxIntensity: 2
+      innerMaxAngle: 0
+      outerMaxAngle: 0
+      innerMaxRadius: 0
+      outerMaxRadius: 0
+      maxIntensity: 0
       maxBarrierScale: 10
     point:
-      innerMaxAngle: 60
-      outerMaxAngle: 120
-      innerMaxRadius: 1
+      innerMaxAngle: 360
+      outerMaxAngle: 360
+      innerMaxRadius: 0
       outerMaxRadius: 5
-      maxIntensity: 2
+      maxIntensity: 0.3
       maxBarrierScale: 10
-    transitionDuration: 0.2
+    transitionDuration: 2
   point: {fileID: 340796631}
   cone: {fileID: 269379187}
-  maxShadowDuration: 2
+  maxShadowDuration: 5
   maxShieldDuration: 5
-  shieldRechargeTime: 5
-  shieldRechargeInitialDelay: 1
+  shieldRechargeTime: 2
+  shieldRechargeInitialDelay: 0
 --- !u!61 &3659680490197567419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -537,7 +537,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 26.58}
+  m_Offset: {x: -0.040806293, y: -0.020131111}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -548,5 +548,36 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.72, y: 10}
+  m_Size: {x: 7.6993637, y: 9.628008}
   m_EdgeRadius: 0
+--- !u!1 &9213559014125894593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1871373239819846257}
+  m_Layer: 0
+  m_Name: LampRotationPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1871373239819846257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9213559014125894593}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1619448017792371628}
+  m_Father: {fileID: 1619448017278948551}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
