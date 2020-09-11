@@ -52,17 +52,27 @@ public class Lamp : MonoBehaviour
     public Slider shadowSlider;
     public Slider shieldSlider;
 
+    [Space(10)]
     public float maxShadowDuration = 2.0f;
+    public float shadowRechargeTime = 5f;
+    public float shadowRechargeDelay = 1f;
+    [Space(10)]
     public float maxShieldDuration = 5f;
     public float shieldRechargeTime = 5f;
     public float shieldRechargeInitialDelay = 1f;
 
-    private float maxCapacity = 1f;
-    private float currentCapacity;
-    private float localMaxShieldDuration = 5f;
+    //shadow vars
+    private float shadowCapacity = 1f;
+    private float elapsedShadowDownTime = 0f;
+
+    // light vars
     private float transitionTiming = 0f;
+
+    // shield vars
+    private float maxCapacity = 1f;
+    private float shieldCapacity;
+    private float localMaxShieldDuration = 5f;
     private float elapsedShieldUpTime = 0f;
-    private float elapsedShadowTime = 0f;
     private float elapsedShieldDownTime = 0f;
 
     private bool shieldActive = false;
@@ -83,15 +93,18 @@ public class Lamp : MonoBehaviour
 
     private float shieldMaxDist;
     private float shieldMinDist;
+    private Player player;
     public float shieldMinDistPercent = 0.5f;
     public GameObject shieldTriggerFX;
     public GameObject shieldEmptyFX;
     public GameObject onCollideProjectileFX;
+    [Space(10)]
+    public GameObject ShadowForm;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentCapacity = maxCapacity;
+        shieldCapacity = maxCapacity;
         oldLightSettings = defaultLightSettings.Clone();
         currentLightSettings = defaultLightSettings.Clone();
         targetLightSettings = defaultLightSettings.Clone();        
@@ -112,6 +125,9 @@ public class Lamp : MonoBehaviour
         shieldMaxDist = shieldTransform.localPosition.y;
         shieldMinDist = shieldMaxDist * shieldMinDistPercent;
 
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        ShadowForm.SetActive(false);
+        shadowCapacity = 1f;
     }
 
     // in case we want to do something if the shield is hit by bullets
@@ -137,13 +153,26 @@ public class Lamp : MonoBehaviour
 
     private bool CanActivate()
     {
-        return currentCapacity > 0 && !shieldActive && !shadowActive;
+        return shieldCapacity > 0 && !shieldActive && !shadowActive && shadowCapacity > 0;
     }
 
     public void ActivateShadow()
     {
         if ( CanActivate() )
         {
+            // enable the dark form
+            ShadowForm.SetActive(true);
+            // disable the collider on the player
+            var spriteRenderer = player.GetComponent<SpriteRenderer>();
+            if ( spriteRenderer != null )
+            {
+                spriteRenderer.enabled = false;
+            }
+            var playerCollider = player.GetComponent<PolygonCollider2D>();
+            if ( playerCollider != null )
+            {
+                playerCollider.enabled = false;
+            }            
             oldLightSettings = currentLightSettings.Clone();
             targetLightSettings = shadowLightSettings.Clone();
             transitionTiming = 0f;
@@ -151,20 +180,31 @@ public class Lamp : MonoBehaviour
             {
                 DeactivateShield();
             }
-            shadowActive = true;
-            elapsedShadowTime = 0f;
+            shadowActive = true;            
         }
     }
     
     public void DeactivateShadow()
     {
-        DeactivateShield();
-        currentCapacity = 0;
-        elapsedShadowTime = 0;
-        oldLightSettings = shieldEmptyLightSettings.Clone();
-        currentLightSettings = shieldEmptyLightSettings.Clone();
-        targetLightSettings = defaultLightSettings.Clone();
-        ReturnToDefault();
+        if ( shadowActive)
+        {
+            ShadowForm.SetActive(false);
+            var playerCollider = player.GetComponent<PolygonCollider2D>();
+            if (playerCollider != null)
+            {
+                playerCollider.enabled = true;
+            }
+            var spriteRenderer = player.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = true;
+            }
+
+            oldLightSettings = shieldEmptyLightSettings.Clone();
+            targetLightSettings = defaultLightSettings.Clone();
+            ReturnToDefault();
+            elapsedShadowDownTime = 0f;
+        }
     }
 
     public void ActivateShield()
@@ -172,26 +212,26 @@ public class Lamp : MonoBehaviour
         if ( CanActivate())
         {
             var sourcelightSettings = shieldLightSettings.Clone();
-            currentLightSettings.cone.innerMaxAngle = Mathf.Lerp(sourcelightSettings.cone.innerMaxAngle, shieldEmptyLightSettings.cone.innerMaxAngle, 1 - currentCapacity);
-            currentLightSettings.cone.outerMaxAngle = Mathf.Lerp(sourcelightSettings.cone.outerMaxAngle, shieldEmptyLightSettings.cone.outerMaxAngle, 1 - currentCapacity);
-            currentLightSettings.cone.innerMaxRadius = Mathf.Lerp(sourcelightSettings.cone.innerMaxRadius, shieldEmptyLightSettings.cone.innerMaxRadius, 1 - currentCapacity);
-            currentLightSettings.cone.outerMaxRadius = Mathf.Lerp(sourcelightSettings.cone.outerMaxRadius, shieldEmptyLightSettings.cone.outerMaxRadius, 1 - currentCapacity);
-            currentLightSettings.cone.maxIntensity = Mathf.Lerp(sourcelightSettings.cone.maxIntensity, shieldEmptyLightSettings.cone.maxIntensity, 1 - currentCapacity);
-            currentLightSettings.cone.color = Color.Lerp(sourcelightSettings.cone.color, shieldEmptyLightSettings.cone.color, 1 - currentCapacity);
+            currentLightSettings.cone.innerMaxAngle = Mathf.Lerp(sourcelightSettings.cone.innerMaxAngle, shieldEmptyLightSettings.cone.innerMaxAngle, 1 - shieldCapacity);
+            currentLightSettings.cone.outerMaxAngle = Mathf.Lerp(sourcelightSettings.cone.outerMaxAngle, shieldEmptyLightSettings.cone.outerMaxAngle, 1 - shieldCapacity);
+            currentLightSettings.cone.innerMaxRadius = Mathf.Lerp(sourcelightSettings.cone.innerMaxRadius, shieldEmptyLightSettings.cone.innerMaxRadius, 1 - shieldCapacity);
+            currentLightSettings.cone.outerMaxRadius = Mathf.Lerp(sourcelightSettings.cone.outerMaxRadius, shieldEmptyLightSettings.cone.outerMaxRadius, 1 - shieldCapacity);
+            currentLightSettings.cone.maxIntensity = Mathf.Lerp(sourcelightSettings.cone.maxIntensity, shieldEmptyLightSettings.cone.maxIntensity, 1 - shieldCapacity);
+            currentLightSettings.cone.color = Color.Lerp(sourcelightSettings.cone.color, shieldEmptyLightSettings.cone.color, 1 - shieldCapacity);
 
-            currentLightSettings.point.innerMaxAngle = Mathf.Lerp(sourcelightSettings.point.innerMaxAngle, shieldEmptyLightSettings.point.innerMaxAngle, 1 - currentCapacity);
-            currentLightSettings.point.outerMaxAngle = Mathf.Lerp(sourcelightSettings.point.outerMaxAngle, shieldEmptyLightSettings.point.outerMaxAngle, 1 - currentCapacity);
-            currentLightSettings.point.innerMaxRadius = Mathf.Lerp(sourcelightSettings.point.innerMaxRadius, shieldEmptyLightSettings.point.innerMaxRadius, 1 - currentCapacity);
-            currentLightSettings.point.outerMaxRadius = Mathf.Lerp(sourcelightSettings.point.outerMaxRadius, shieldEmptyLightSettings.point.outerMaxRadius, 1 - currentCapacity);
-            currentLightSettings.point.maxIntensity = Mathf.Lerp(sourcelightSettings.point.maxIntensity, shieldEmptyLightSettings.point.maxIntensity, 1 - currentCapacity);
-            currentLightSettings.point.color = Color.Lerp(sourcelightSettings.point.color, shieldEmptyLightSettings.point.color, 1 - currentCapacity);
+            currentLightSettings.point.innerMaxAngle = Mathf.Lerp(sourcelightSettings.point.innerMaxAngle, shieldEmptyLightSettings.point.innerMaxAngle, 1 - shieldCapacity);
+            currentLightSettings.point.outerMaxAngle = Mathf.Lerp(sourcelightSettings.point.outerMaxAngle, shieldEmptyLightSettings.point.outerMaxAngle, 1 - shieldCapacity);
+            currentLightSettings.point.innerMaxRadius = Mathf.Lerp(sourcelightSettings.point.innerMaxRadius, shieldEmptyLightSettings.point.innerMaxRadius, 1 - shieldCapacity);
+            currentLightSettings.point.outerMaxRadius = Mathf.Lerp(sourcelightSettings.point.outerMaxRadius, shieldEmptyLightSettings.point.outerMaxRadius, 1 - shieldCapacity);
+            currentLightSettings.point.maxIntensity = Mathf.Lerp(sourcelightSettings.point.maxIntensity, shieldEmptyLightSettings.point.maxIntensity, 1 - shieldCapacity);
+            currentLightSettings.point.color = Color.Lerp(sourcelightSettings.point.color, shieldEmptyLightSettings.point.color, 1 - shieldCapacity);
 
 
             transitionTiming = 0f;
             shieldActive = true;
             shieldCollider.enabled = true;
             sprite.enabled = true;
-            localMaxShieldDuration = maxShieldDuration * currentCapacity / maxCapacity;
+            localMaxShieldDuration = maxShieldDuration * shieldCapacity / maxCapacity;
             oldLightSettings = currentLightSettings.Clone();
             targetLightSettings = shieldEmptyLightSettings.Clone();
             targetLightSettings.transitionDuration = localMaxShieldDuration;
@@ -224,7 +264,7 @@ public class Lamp : MonoBehaviour
 
     private void EmptyShield()
     {
-        currentCapacity = 0f;
+        shieldCapacity = 0f;
         elapsedShieldUpTime = 0f;
     }
 
@@ -236,7 +276,7 @@ public class Lamp : MonoBehaviour
         sprite.enabled = false;
         oldLightSettings = currentLightSettings.Clone();
         targetLightSettings = defaultLightSettings.Clone();
-        targetLightSettings.transitionDuration = (1 - currentCapacity) / maxCapacity * (shieldRechargeTime + shieldRechargeInitialDelay);
+        targetLightSettings.transitionDuration = (1 - shieldCapacity) / maxCapacity * (shieldRechargeTime + shieldRechargeInitialDelay);
         transitionTiming = 0f;
         if ( shieldEmptyFX != null )
         {
@@ -246,8 +286,8 @@ public class Lamp : MonoBehaviour
 
     private void UpdateMeters()
     {
-        shadowSlider.SetValueWithoutNotify((maxShadowDuration - elapsedShadowTime) / maxShadowDuration);
-        shieldSlider.SetValueWithoutNotify(currentCapacity / maxCapacity);
+        shadowSlider.SetValueWithoutNotify(shadowCapacity / maxCapacity);
+        shieldSlider.SetValueWithoutNotify(shieldCapacity / maxCapacity);
     }
 
     void Update()
@@ -270,60 +310,63 @@ public class Lamp : MonoBehaviour
     {
         if (shadowActive)
         {
-            elapsedShadowTime += Time.deltaTime;
-            if (elapsedShadowTime > maxShadowDuration)
+            shadowCapacity -= (Time.deltaTime / maxShadowDuration);
+            if (shadowCapacity <= 0)
             {
                 DeactivateShadow();
             }
+        }
+        else
+        {
+            if (elapsedShadowDownTime >= shadowRechargeDelay)
+            {
+                shadowCapacity += (Time.deltaTime / (shadowRechargeTime + shadowRechargeDelay));
+            }
+            elapsedShadowDownTime += Time.deltaTime;
         }
 
         if (shieldActive)
         {
             elapsedShieldUpTime += Time.deltaTime;
-            if (transitionTiming == targetLightSettings.transitionDuration)
-            {
-                //Debug.Log("Shield degradation beginning");
-                //BeginShieldDegradation();
-            }
-
-            currentCapacity -= Time.deltaTime / localMaxShieldDuration;
+            shieldCapacity -= Time.deltaTime / localMaxShieldDuration;
             Vector3 scale = shieldTransform.localScale;
-            scale.x = Mathf.Lerp(shieldMinWidth, shieldMaxWidth, currentCapacity);
+            scale.x = Mathf.Lerp(shieldMinWidth, shieldMaxWidth, shieldCapacity);
             shieldTransform.localScale = scale;
-            shieldTransform.localPosition = new Vector3(0, Mathf.Lerp(shieldMinDist, shieldMaxDist, currentCapacity), 0);
-            if (currentCapacity <= 0)
+            shieldTransform.localPosition = new Vector3(0, Mathf.Lerp(shieldMinDist, shieldMaxDist, shieldCapacity), 0);
+            if (shieldCapacity <= 0)
             {
                 // shield burned out
                 DeactivateShield();
             }
         }
-        else if (!shieldActive && !shadowActive)
+        else
         {
-            elapsedShieldDownTime += Time.deltaTime;
             // regen shield
-            if (elapsedShieldDownTime < shieldRechargeInitialDelay)
+            if (elapsedShieldDownTime > shieldRechargeInitialDelay)
             {
-                return;
+                shieldCapacity += Time.deltaTime / (shieldRechargeTime + shieldRechargeInitialDelay);
             }
-            else
+            elapsedShieldDownTime += Time.deltaTime;
+
+            if (shieldCapacity > 1)
             {
-                currentCapacity += Time.deltaTime / (shieldRechargeTime + shieldRechargeInitialDelay);
+                shieldCapacity = 1;
+                elapsedShieldUpTime = 0;
             }
 
-            if (currentCapacity > 1)
+            if (shadowCapacity > 1f)
             {
-                currentCapacity = 1;
-                elapsedShieldUpTime = 0;
+                shadowCapacity = 1f;
             }
         }
     }
 
     public void UpdateLight()
     {
-        float percentComplete = (1 - currentCapacity) / maxCapacity;  //transitionTiming / targetLightSettings.transitionDuration;
+        float percentComplete = (1 - shieldCapacity) / maxCapacity;  //transitionTiming / targetLightSettings.transitionDuration;
         if ( !shieldActive )
         {
-            percentComplete = currentCapacity / maxCapacity;
+            percentComplete = shieldCapacity / maxCapacity;
         }
 
         currentLightSettings.cone.innerMaxAngle = Mathf.Lerp(oldLightSettings.cone.innerMaxAngle, targetLightSettings.cone.innerMaxAngle, percentComplete);

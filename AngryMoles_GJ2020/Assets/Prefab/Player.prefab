@@ -361,7 +361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2492019213880478973
 Transform:
   m_ObjectHideFlags: 0
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619448017278948549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d9b3e7aed1c1844387cb89722a4bf68, type: 3}
   m_Name: 
@@ -645,7 +645,7 @@ MonoBehaviour:
   timeScoreMultiplier: 1
   killScoreMultiplier: 5
   shieldReflectScoreMultiplier: 2
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 405445033693865863}
 --- !u!114 &1619448017278948601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,15 +978,18 @@ MonoBehaviour:
   shadowSlider: {fileID: 3067920112763101934}
   shieldSlider: {fileID: 6860523007380949312}
   maxShadowDuration: 3
+  shadowRechargeTime: 2
+  shadowRechargeDelay: 1
   maxShieldDuration: 3
   shieldRechargeTime: 2
-  shieldRechargeInitialDelay: 0
+  shieldRechargeInitialDelay: 1
   shieldCollider: {fileID: 6720743749312438573}
   shieldMinWidthPercent: 0.75
   shieldMinDistPercent: 0.75
   shieldTriggerFX: {fileID: 0}
   shieldEmptyFX: {fileID: 0}
   onCollideProjectileFX: {fileID: 0}
+  ShadowForm: {fileID: 1313517161982248840}
 --- !u!61 &3659680490197567419
 BoxCollider2D:
   m_ObjectHideFlags: 0
