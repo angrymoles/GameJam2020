@@ -60,7 +60,7 @@ public class Lamp : MonoBehaviour
     private LightPair targetLightSettings;
 
    
-    private BoxCollider2D shieldCollider;
+    public BoxCollider2D shieldCollider;
     private SpriteRenderer sprite;
     private float shieldMaxWidth;
     private float shieldMinWidth;
@@ -70,14 +70,13 @@ public class Lamp : MonoBehaviour
     {
         currentCapacity = maxCapacity;
         currentLightSettings = defaultLightSettings.Clone();
-        targetLightSettings = defaultLightSettings.Clone();
-        shieldCollider = GetComponent<BoxCollider2D>();
+        targetLightSettings = defaultLightSettings.Clone();        
         shieldCollider.enabled = false;
         shieldMaxWidth = shieldCollider.size.x;
         shieldMinWidth = shieldMaxWidth / 2;
 
         // debug only
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = shieldCollider.GetComponent<SpriteRenderer>();
         sprite.enabled = false;
     }
 
