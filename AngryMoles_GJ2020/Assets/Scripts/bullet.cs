@@ -21,10 +21,13 @@ public class bullet : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         // 9 is the Player Layer
-        if (collision.gameObject.layer==9)
+        if (collision.gameObject.layer==9 && gameObject.layer == 13)
         {
-            if (collision.GetContact(0).collider.transform.gameObject.name == "Lamp")
-            {
+            if (collision.GetContact(0).collider.transform.gameObject.name == "Shield")
+            {//Barrier
+                gameObject.layer = 15;
+                myLight.GetComponent<Light2D>().color = Color.blue;
+                GetComponent<SpriteRenderer>().color = Color.blue;
                 return;
             }
 
@@ -48,7 +51,7 @@ public class bullet : MonoBehaviour
         }
 
         //11 Enemy
-        if (collision.gameObject.layer == 11)
+        if (collision.gameObject.layer == 11 && gameObject.layer == 15)
         {
             GameObject effect = Instantiate(hitEffect[2], transform.position, Quaternion.identity);
             Destroy(effect, destroyHitEffectTime);
@@ -75,16 +78,12 @@ public class bullet : MonoBehaviour
             return;
         }
 
-
-
-
-
     }
     // Start is called before the first frame update
     void Start()
     {
-        myLight.GetComponent<Light2D>().color = new Color(Random.Range(0F, 1F), Random.Range(0, 1F), Random.Range(0, 1F));
-        GetComponent<SpriteRenderer>().color=Random.ColorHSV();
+        myLight.GetComponent<Light2D>().color = Color.red;
+        GetComponent<SpriteRenderer>().color = Color.red;
     }
 
     // Update is called once per frame
