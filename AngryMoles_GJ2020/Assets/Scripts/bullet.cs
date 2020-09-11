@@ -83,13 +83,8 @@ public class bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bulletSpeed = Random.Range(3, 12);
         myLight.GetComponent<Light2D>().color = new Color(Random.Range(0F, 1F), Random.Range(0, 1F), Random.Range(0, 1F));
         GetComponent<SpriteRenderer>().color=Random.ColorHSV();
-        //Debug.Log(bulletSpeed);
-        //GetComponent<Rigidbody2D>().AddForce(transform.forward * bulletSpeed);
-        //rb = GetComponent<Rigidbody2D>();
-        //rb.velocity = Vector3.up;
     }
 
     // Update is called once per frame
