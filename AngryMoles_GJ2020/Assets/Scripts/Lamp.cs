@@ -72,8 +72,10 @@ public class Lamp : MonoBehaviour
         currentLightSettings = defaultLightSettings.Clone();
         targetLightSettings = defaultLightSettings.Clone();        
         shieldCollider.enabled = false;
-        shieldMaxWidth = shieldCollider.size.x;
+        shieldMaxWidth = shieldCollider.gameObject.transform.localScale.x;
         shieldMinWidth = shieldMaxWidth / 2;
+        Physics2D.IgnoreLayerCollision(10, 12);
+        Physics2D.IgnoreLayerCollision(11, 12);
 
         // debug only
         sprite = shieldCollider.GetComponent<SpriteRenderer>();
@@ -195,7 +197,7 @@ public class Lamp : MonoBehaviour
             }
 
             currentCapacity -= Time.deltaTime / localMaxShieldDuration;
-            shieldCollider.size.Set(Mathf.Lerp(shieldMaxWidth, shieldMinWidth, currentCapacity), shieldCollider.size.y);
+            shieldCollider.gameObject.transform.localScale.Set(Mathf.Lerp(shieldMaxWidth, shieldMinWidth, currentCapacity), shieldCollider.gameObject.transform.localScale.y, shieldCollider.gameObject.transform.localScale.z);
             if (currentCapacity <= 0)
             {
                 // shield burned out
