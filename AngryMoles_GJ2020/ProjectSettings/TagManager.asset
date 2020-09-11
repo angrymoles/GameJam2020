@@ -15,18 +15,14 @@ TagManager:
   - UI
   - 
   - 
-  - ShadowObstacle
+  - 
   - Player
   - Wall
   - Enemy
   - Shield
-  - RedBullet
-  - ShadowForm
-<<<<<<< HEAD
-  - FadeLayer
-=======
-  - BlueBullet
->>>>>>> 0271171b07bd4c829671d95e7a7be0fefd83d1dd
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,16 +42,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Ground
-    uniqueID: 2945669971
-    locked: 0
-  - name: UI
-    uniqueID: 3272460921
-    locked: 0
-  - name: ShadowObstacle
-    uniqueID: 3369480117
-    locked: 0
-  - name: Player
-    uniqueID: 1928332547
     locked: 0
