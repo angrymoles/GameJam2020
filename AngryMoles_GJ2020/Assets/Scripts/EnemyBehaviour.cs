@@ -16,14 +16,19 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform target;
     public Vector3 targetDirection;
 
+    public EnemyMovement enemyMovement;
+    public int stopMaxFireCount = 3;
+
+    private int fireCount;
+
 
     // Start is called before the first frame update
     void Start()
     {
         target = FindObjectOfType<Player>().GetComponent<Transform>();
         rb =weapon.GetComponent<Rigidbody2D>();
+        fireCount = 0;
         StartCoroutine(ShootRoutine());
-
     }
 
     // Update is called once per frame
@@ -39,7 +44,11 @@ public class EnemyBehaviour : MonoBehaviour
     {
         while (true)
         {
-            Shoot();
+            if (enemyMovement.GetMoveState() == EnemyMovement.MOVE_STATE.E_STOP
+                || enemyMovement.GetMoveState() == EnemyMovement.MOVE_STATE.E_END)
+            {
+                Shoot();
+            }
             yield return new WaitForSeconds(fireRate);
         }
     }
@@ -56,6 +65,13 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 dirction = target.position - firePoint.position;
         dirction.Normalize();
         rb.AddForce(dirction * bulletForce, ForceMode2D.Impulse);
+        fireCount++;
+
+        if (fireCount > stopMaxFireCount && enemyMovement.GetMoveState() != EnemyMovement.MOVE_STATE.E_END)
+        {
+            fireCount = 0;
+            enemyMovement.SetMoveState(EnemyMovement.MOVE_STATE.E_MOVE);
+        }
     }
 
 }
