@@ -70,6 +70,8 @@ public class Lamp : MonoBehaviour
     private float shieldMaxDist;
     private float shieldMinDist;
     public float shieldMinDistPercent = 0.5f;
+    public GameObject shieldTriggerVFX;
+    public GameObject shieldEmptyVFX;
 
     // Start is called before the first frame update
     void Start()
@@ -153,6 +155,12 @@ public class Lamp : MonoBehaviour
             targetLightSettings = shieldEmptyLightSettings.Clone();
             targetLightSettings.transitionDuration = localMaxShieldDuration;
             elapsedShieldDownTime = 0f;
+            
+            if ( shieldTriggerVFX != null)
+            {
+                ParticleSystem particleSystem = shieldTriggerVFX.GetComponent<ParticleSystem>();
+                particleSystem.Play();
+            }
         }
     }
 
@@ -184,6 +192,11 @@ public class Lamp : MonoBehaviour
         shieldActive = false;
         shieldCollider.enabled = false;
         sprite.enabled = false;
+        if ( shieldEmptyVFX != null )
+        {
+            ParticleSystem particleSystem = shieldEmptyVFX.GetComponent<ParticleSystem>();
+            particleSystem.Play();
+        }
     }
 
     private void UpdateMeters()
@@ -224,8 +237,8 @@ public class Lamp : MonoBehaviour
             elapsedShieldUpTime += Time.deltaTime;
             if (transitionTiming == targetLightSettings.transitionDuration)
             {
-                Debug.Log("Shield degradation beginning");
-                BeginShieldDegradation();
+                //Debug.Log("Shield degradation beginning");
+                //BeginShieldDegradation();
             }
 
             currentCapacity -= Time.deltaTime / localMaxShieldDuration;
