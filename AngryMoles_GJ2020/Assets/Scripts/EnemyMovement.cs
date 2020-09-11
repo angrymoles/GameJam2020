@@ -18,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
     public Rigidbody2D rigidBody;
     private int curMovePoint;
     private MOVE_STATE moveState = MOVE_STATE.E_SPAWN_MOVE;
+    private Transform target;
 
     public void SetMoveState(MOVE_STATE value)
     {
@@ -31,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
+        target = FindObjectOfType<Player>().GetComponent<Transform>();
         moveState = MOVE_STATE.E_SPAWN_MOVE;
         curMovePoint = 0;
     }
@@ -38,6 +40,11 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (enemyPoints == null || door == null)
+        {
+            return;
+        }
+
         if (moveState == MOVE_STATE.E_SPAWN_MOVE)
         {
             SpawnMove();
@@ -50,6 +57,11 @@ public class EnemyMovement : MonoBehaviour
         {
             Stop();
         }
+
+        Vector2 targetPosition = new Vector2(target.position.x, target.position.y);
+        Vector2 lookDir = targetPosition - rigidBody.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270.0f;
+        rigidBody.rotation = angle;
     }
 
     void SpawnMove()

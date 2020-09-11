@@ -16,6 +16,9 @@ public class EnemyPoints : MonoBehaviour
             {
                 continue;
             }
+            Vector3 newPosition = child.position;
+            newPosition.z = 0.1f;
+            child.position = newPosition;
             EnemyMovePoints.Add(child);
         }
     }
