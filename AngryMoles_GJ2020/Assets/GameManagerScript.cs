@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript instance;
-    public int levelNumber;    
+    public float transitionTime = 1f;
+     
     
     // Start is called before the first frame update
     void Start()
@@ -52,22 +53,25 @@ public class GameManagerScript : MonoBehaviour
     }
     
 
-    public void LoadRandomScene()
-    {
-        GetComponent<Animator>().SetTrigger("FadeOut");
-        var rng = Random.Range(1, 10);
-        SceneManager.LoadScene("Level" + rng);
-    }
-
-    public void ESCKey()
+       public void ESCKey()
     {
         if (Input.GetKey(KeyCode.Escape))
         {            
-            if (SceneManager.GetActiveScene().name != "Level0")
-            {
+            if (SceneManager.GetActiveScene().name != "Level0"&& SceneManager.GetActiveScene().name != "LoadScreen")
+            {               
                 SceneManager.LoadScene("Level0");
             }
         }
+    }
+
+    IEnumerator LoadLevel(int levelIndex)
+    {
+        levelIndex= Random.Range(1, 10);
+        GetComponent<Animator>().SetTrigger("FadeOut");
+
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(levelIndex);
+
     }
 
     public void EXITGAME()
