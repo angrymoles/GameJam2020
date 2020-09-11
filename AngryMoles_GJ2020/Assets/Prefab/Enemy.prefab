@@ -192,7 +192,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetDirection: {x: 0, y: 0, z: 0}
   enemyMovement: {fileID: 4001717466052187321}
-  stopMaxFireCount: 2
+  stopMaxFireCount: 0
 --- !u!114 &3611970170944531192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +248,7 @@ MonoBehaviour:
   door: {fileID: 0}
   enemyPoints: {fileID: 0}
   rigidBody: {fileID: 1409214300586040918}
+  bFinishedMove: 0
 --- !u!50 &1409214300586040918
 Rigidbody2D:
   serializedVersion: 4

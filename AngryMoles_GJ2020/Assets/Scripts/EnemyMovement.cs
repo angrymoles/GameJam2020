@@ -49,6 +49,11 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (target == null)
+        {
+            return;
+        }
+
         if (enemyPoints == null || door == null)
         {
             return;
@@ -71,10 +76,13 @@ public class EnemyMovement : MonoBehaviour
             Stop();
         }
 
-        Vector2 targetPosition = new Vector2(target.position.x, target.position.y);
-        Vector2 lookDir = targetPosition - rigidBody.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270.0f;
-        rigidBody.rotation = angle;
+        if (target != null)
+        {
+            Vector2 targetPosition = new Vector2(target.position.x, target.position.y);
+            Vector2 lookDir = targetPosition - rigidBody.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270.0f;
+            rigidBody.rotation = angle;
+        }
     }
 
     void SpawnMove()
@@ -120,6 +128,11 @@ public class EnemyMovement : MonoBehaviour
 
     void ChasePlayer()
     {
+        if (target == null)
+        {
+            return;
+        }
+
         if (curChaseTime > chaseTime)
         {
             SetMoveState(MOVE_STATE.E_STOP);
