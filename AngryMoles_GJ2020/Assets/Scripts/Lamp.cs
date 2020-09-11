@@ -62,8 +62,14 @@ public class Lamp : MonoBehaviour
    
     public BoxCollider2D shieldCollider;
     private SpriteRenderer sprite;
+    private Transform shieldTransform;
     private float shieldMaxWidth;
     private float shieldMinWidth;
+    public float shieldMinWidthPercent = 0.5f;
+
+    private float shieldMaxDist;
+    private float shieldMinDist;
+    public float shieldMinDistPercent = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -72,12 +78,22 @@ public class Lamp : MonoBehaviour
         currentLightSettings = defaultLightSettings.Clone();
         targetLightSettings = defaultLightSettings.Clone();        
         shieldCollider.enabled = false;
-        shieldMaxWidth = shieldCollider.size.x;
-        shieldMinWidth = shieldMaxWidth / 2;
+        
+        Physics2D.IgnoreLayerCollision(10, 12);
+        Physics2D.IgnoreLayerCollision(11, 12);
 
         // debug only
         sprite = shieldCollider.GetComponent<SpriteRenderer>();
         sprite.enabled = false;
+
+        shieldTransform = shieldCollider.gameObject.transform;
+
+        shieldMaxWidth = shieldTransform.localScale.x;
+        shieldMinWidth = shieldMaxWidth * shieldMinWidthPercent;
+
+        shieldMaxDist = shieldTransform.localPosition.y;
+        shieldMinDist = shieldMaxDist * shieldMinDistPercent;
+
     }
 
     // in case we want to do something if the shield is hit by bullets
@@ -195,7 +211,11 @@ public class Lamp : MonoBehaviour
             }
 
             currentCapacity -= Time.deltaTime / localMaxShieldDuration;
-            shieldCollider.size.Set(Mathf.Lerp(shieldMaxWidth, shieldMinWidth, currentCapacity), shieldCollider.size.y);
+            //shieldCollider.gameObject.transform.localScale.Set(Mathf.Lerp(shieldMaxWidth, shieldMinWidth, currentCapacity), shieldCollider.gameObject.transform.localScale.y, shieldCollider.gameObject.transform.localScale.z);
+            Vector3 scale = shieldTransform.localScale;
+            scale.x = Mathf.Lerp(shieldMinWidth, shieldMaxWidth, currentCapacity);
+            shieldTransform.localScale = scale;
+            shieldTransform.localPosition = new Vector3(0, Mathf.Lerp(shieldMinDist, shieldMaxDist, currentCapacity), 0);
             if (currentCapacity <= 0)
             {
                 // shield burned out

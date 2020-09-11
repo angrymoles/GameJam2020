@@ -8,15 +8,9 @@ public class bullet : MonoBehaviour
 {
     public GameObject[] hitEffect;
     public float destroyHitEffectTime = 2f;
-    public float lifeTime = 300f;
     public int damage = 1;
-    public float bulletSpeed = 5f;
     private Rigidbody2D rb;
     public GameObject myLight;
-
-    //public UnityEngine.Experimental.Rendering.Universal.Light2D attachedLight;
-
-    private float timeSpan = 0f;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -45,9 +39,7 @@ public class bullet : MonoBehaviour
         //10 is the wall layer
         if (collision.gameObject.layer==10)
         {
-            GameObject effect = Instantiate(hitEffect[1], transform.position, Quaternion.identity);
-            Destroy(effect, destroyHitEffectTime);
-            Destroy(gameObject);
+            return;
         }
 
         //11 Enemy
@@ -89,16 +81,5 @@ public class bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //LifeTimeProcess();
-    }
-
-    void LifeTimeProcess()
-    {
-        timeSpan += Time.deltaTime;
-
-        if (timeSpan > lifeTime)
-        {
-            Destroy(gameObject);
-        }
     }
 }

@@ -20,9 +20,9 @@ TagManager:
   - Wall
   - Enemy
   - Shield
-  - Bullet
+  - RedBullet
   - ShadowForm
-  - 
+  - BlueBullet
   - 
   - 
   - 
