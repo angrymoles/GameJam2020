@@ -70,7 +70,15 @@ public class EnemyBehaviour : MonoBehaviour
         if (fireCount > stopMaxFireCount && enemyMovement.GetMoveState() != EnemyMovement.MOVE_STATE.E_END)
         {
             fireCount = 0;
-            enemyMovement.SetMoveState(EnemyMovement.MOVE_STATE.E_MOVE);
+
+            if (enemyMovement.bFinishedMove)
+            {
+                enemyMovement.SetMoveState(EnemyMovement.MOVE_STATE.E_CHASE);
+            }
+            else
+            {
+                enemyMovement.SetMoveState(EnemyMovement.MOVE_STATE.E_MOVE);
+            }
         }
     }
 

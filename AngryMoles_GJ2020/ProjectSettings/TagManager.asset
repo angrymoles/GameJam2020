@@ -20,9 +20,13 @@ TagManager:
   - Wall
   - Enemy
   - Shield
-  - Bullet
+  - RedBullet
   - ShadowForm
+<<<<<<< HEAD
   - FadeLayer
+=======
+  - BlueBullet
+>>>>>>> 0271171b07bd4c829671d95e7a7be0fefd83d1dd
   - 
   - 
   - 

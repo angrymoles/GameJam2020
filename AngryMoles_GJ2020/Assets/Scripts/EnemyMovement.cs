@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
         E_SPAWN_MOVE,
         E_MOVE,
         E_STOP,
+        E_CHASE,
         E_END,
     };
 
@@ -20,6 +21,10 @@ public class EnemyMovement : MonoBehaviour
     private MOVE_STATE moveState = MOVE_STATE.E_SPAWN_MOVE;
     private Transform target;
     private Renderer enemyRenderer;
+    private float chaseTime = 2.0f;
+    private float curChaseTime = 0.0f;
+    private const float chaseDistance = 2.0f;
+    public bool bFinishedMove = false;
 
     public void SetMoveState(MOVE_STATE value)
     {
@@ -36,8 +41,9 @@ public class EnemyMovement : MonoBehaviour
         target = FindObjectOfType<Player>().GetComponent<Transform>();
         moveState = MOVE_STATE.E_SPAWN_MOVE;
         curMovePoint = 0;
-        //m_ObjectRenderer = GetComponent<Renderer>();
-        //gameObject.renderer.enabled = false;
+        bFinishedMove = true;
+        enemyRenderer = gameObject.GetComponent<Renderer>();
+        enemyRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -55,6 +61,10 @@ public class EnemyMovement : MonoBehaviour
         else if (moveState == MOVE_STATE.E_MOVE)
         {
             MoveEnemyPoints();
+        }
+        else if (moveState == MOVE_STATE.E_CHASE)
+        {
+            ChasePlayer();
         }
         else if (moveState == MOVE_STATE.E_STOP)
         {
@@ -74,20 +84,19 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        if (curMovePoint <= 1)
-        {
-        }
-        else
-        {
-            gameObject.SetActive(true);
-        }
-
         Vector3 destPoint = ((Transform)(door.DoorPoints[curMovePoint + 1])).position;
         //SpawnPoint
-        if (MoveEnemey(destPoint) && curMovePoint >= 2)
+        if (MoveEnemey(destPoint) )
         {
-            SetMoveState(MOVE_STATE.E_MOVE);
-            curMovePoint = 0;
+            if (curMovePoint >= 2)
+            {
+                SetMoveState(MOVE_STATE.E_MOVE);
+                curMovePoint = 0;
+            }
+            else if (curMovePoint == 1)
+            {
+                enemyRenderer.enabled = true;
+            }
         }
     }
 
@@ -96,8 +105,8 @@ public class EnemyMovement : MonoBehaviour
         ArrayList points = enemyPoints.EnemyMovePoints;
         if (curMovePoint >= points.Count)
         {
-            Stop();
-            SetMoveState(MOVE_STATE.E_END);
+            bFinishedMove = true;
+            SetMoveState(MOVE_STATE.E_CHASE);
             return;
         }
 
@@ -106,6 +115,32 @@ public class EnemyMovement : MonoBehaviour
         if (MoveEnemey(destPoint))
         {
             SetMoveState(MOVE_STATE.E_STOP);
+        }
+    }
+
+    void ChasePlayer()
+    {
+        if (curChaseTime > chaseTime)
+        {
+            SetMoveState(MOVE_STATE.E_STOP);
+            curChaseTime = 0.0f;
+        }
+        else
+        {
+            curChaseTime += Time.deltaTime;
+
+            Vector2 dest = new Vector2(target.position.x, target.position.y);
+            Vector2 dir = dest - rigidBody.position;
+            if (Vector3.Magnitude(dir) > chaseDistance)
+            {
+                dir.Normalize();
+                rigidBody.MovePosition(rigidBody.position + dir * enemySpeed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                SetMoveState(MOVE_STATE.E_STOP);
+                curChaseTime = 0.0f;
+            }
         }
     }
 

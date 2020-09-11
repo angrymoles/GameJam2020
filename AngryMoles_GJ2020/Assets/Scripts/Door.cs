@@ -38,7 +38,7 @@ public class Door : MonoBehaviour
         GameObject enemy = Instantiate(EnemyPrefab, spawnPoint.position, spawnPoint.rotation);
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         enemyMovement.door = gameObject.GetComponent<Door>();
-        int index = Random.Range(0, enemyPoints.Length -1);
+        int index = Random.Range(0, enemyPoints.Length);
         enemyMovement.enemyPoints = enemyPoints[index];
     }
 }
