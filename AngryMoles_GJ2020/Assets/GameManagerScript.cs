@@ -6,21 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
-    public static GameManagerScript instance;
+    //public static GameManagerScript instance;
     public float transitionTime = 1f;
+    public int EscMessageNumber=-1;
      
     
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null)
-            instance = this;
-        else
-        {
-            Destroy(this);
-        }           
-        DontDestroyOnLoad(gameObject);
-        return;
+        //if (instance == null)
+        //    instance = this;
+        //else
+        //{
+        //    Destroy(this);
+        //}           
+        //DontDestroyOnLoad(gameObject);
+        //return;
        
     }
 
@@ -28,55 +29,56 @@ public class GameManagerScript : MonoBehaviour
     {
         ESCKey();
     }
-    public void TransitionScene()
+    public void LoadRandomScene()
     {
-        
+        var rng= Random.Range(1, 10);
+        StartCoroutine(LoadLevel(rng));
     }
-
-    public void LoadMenu()
-    {
-        
-        SceneManager.LoadScene("Level0");
-    }
-
-
 
     public void FadeToLevel(int levelIndex)
     {
-        GetComponent<Animator>().SetTrigger("FadeOut");
+       GetComponent<Animator>().SetTrigger("FadeOut");
     }
 
-    public void OnFadeComplete()
-    {
-        var rng = Random.Range(1, 10);
-        SceneManager.LoadScene("Level" + rng);
-    }
+    //public void OnFadeComplete()
+    //{
+    //    var rng = Random.Range(1, 10);
+    //    SceneManager.LoadScene("Level" + rng);
+    //}
     
 
-       public void ESCKey()
+   public void ESCKey()
     {
         if (Input.GetKey(KeyCode.Escape))
-        {            
-            if (SceneManager.GetActiveScene().name != "Level0"&& SceneManager.GetActiveScene().name != "LoadScreen")
-            {               
-                SceneManager.LoadScene("Level0");
-            }
+        {
+            StartCoroutine(LoadLevel(0));
         }
     }
 
     IEnumerator LoadLevel(int levelIndex)
     {
-        levelIndex= Random.Range(1, 10);
+
+        if (levelIndex == 0) { }
+        else if (levelIndex == 11) { }
+        else
+        {
+            levelIndex = Random.Range(1, 10);
+        }
+       
         GetComponent<Animator>().SetTrigger("FadeOut");
 
         yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(levelIndex);   
 
+    }
+
+    public void LoadDeathScreen()
+    {
+        StartCoroutine(LoadLevel(11));
     }
 
     public void EXITGAME()
     {
-        Debug.Log("IQuit");
         Application.Quit();
     }
     
