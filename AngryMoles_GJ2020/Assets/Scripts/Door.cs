@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public EnemyPoints[] enemyPoints;
+
+    public GameObject Spawnpoint;
+    public GameObject DoorPoint;
+    public GameObject TargetPoint;
+
+    public Transform[] point;
+    public GameObject point1;
+    public GameObject point2;
+    public GameObject point3;
+
+    public ArrayList enemyPoints;
     public ArrayList DoorPoints;
     public GameObject EnemyPrefab;
     public float spawnTime = 3.0f;
@@ -12,9 +22,10 @@ public class Door : MonoBehaviour
     void Start()
     {
         DoorPoints = new ArrayList(3);
-        DoorPoints.Add(transform.GetChild(0)); //Spawn
-        DoorPoints.Add(transform.GetChild(1)); //Door
-        DoorPoints.Add(transform.GetChild(2)); //Front
+        DoorPoints.Add(Spawnpoint); //Spawn
+        DoorPoints.Add(DoorPoint); //Door
+        DoorPoints.Add(TargetPoint); //Front
+       // enemyPoints = new ArrayList(3);       
         StartCoroutine(SpawnEnemyRoutine());
     }
 
@@ -34,11 +45,11 @@ public class Door : MonoBehaviour
 
     public void SpawnEnemey()
     {
-        Transform spawnPoint = (Transform)DoorPoints[0];
-        GameObject enemy = Instantiate(EnemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        //Transform spawnPoint = (Transform)DoorPoints[0];
+        GameObject enemy = Instantiate(EnemyPrefab, Spawnpoint.transform.position, Spawnpoint.transform.rotation);
         EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
         enemyMovement.door = gameObject.GetComponent<Door>();
-        int index = Random.Range(0, enemyPoints.Length -1);
-        enemyMovement.enemyPoints = enemyPoints[index];
+        int index = Random.Range(0, point.Length -1);
+       // enemyMovement.enemyPoints = point[index];
     }
 }
