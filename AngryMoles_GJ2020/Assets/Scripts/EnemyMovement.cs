@@ -86,7 +86,7 @@ public class EnemyMovement : MonoBehaviour
         //SpawnPoint
         if (MoveEnemey(destPoint) && curMovePoint >= 2)
         {
-            SetMoveState(MOVE_STATE.E_STOP);
+            SetMoveState(MOVE_STATE.E_MOVE);
             curMovePoint = 0;
         }
     }
