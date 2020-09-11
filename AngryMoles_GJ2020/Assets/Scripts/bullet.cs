@@ -37,8 +37,9 @@ public class bullet : MonoBehaviour
             Destroy(gameObject);
         }
         //10 is the wall layer
-        if (collision.gameObject.layer==10)
+        if (collision.gameObject.layer==10|| collision.gameObject.layer == 16)
         {
+            GameObject effect = Instantiate(hitEffect[1], transform.position, Quaternion.identity);
             return;
         }
 

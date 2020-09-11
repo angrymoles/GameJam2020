@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5602519605802808102}
   - component: {fileID: 8704312479308677740}
   - component: {fileID: 5985956129319447205}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   - {x: -0.5024743, y: -0.540369, z: 0}
   m_ShapePathHash: 2066206465
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1354
+  m_InstanceId: -1768
 --- !u!61 &5985956129319447205
 BoxCollider2D:
   m_ObjectHideFlags: 0
