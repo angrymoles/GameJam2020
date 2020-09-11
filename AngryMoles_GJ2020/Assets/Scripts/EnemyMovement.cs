@@ -42,6 +42,8 @@ public class EnemyMovement : MonoBehaviour
         moveState = MOVE_STATE.E_SPAWN_MOVE;
         curMovePoint = 0;
         bFinishedMove = true;
+        enemyRenderer = gameObject.GetComponent<Renderer>();
+        enemyRenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -82,20 +84,19 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
-        if (curMovePoint <= 1)
-        {
-        }
-        else
-        {
-            gameObject.SetActive(true);
-        }
-
         Vector3 destPoint = ((Transform)(door.DoorPoints[curMovePoint + 1])).position;
         //SpawnPoint
-        if (MoveEnemey(destPoint) && curMovePoint >= 2)
+        if (MoveEnemey(destPoint) )
         {
-            SetMoveState(MOVE_STATE.E_MOVE);
-            curMovePoint = 0;
+            if (curMovePoint >= 2)
+            {
+                SetMoveState(MOVE_STATE.E_MOVE);
+                curMovePoint = 0;
+            }
+            else if (curMovePoint == 1)
+            {
+                enemyRenderer.enabled = true;
+            }
         }
     }
 
