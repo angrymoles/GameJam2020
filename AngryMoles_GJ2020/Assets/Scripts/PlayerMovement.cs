@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float lightMovespeed;
     public float darkMovespeed;
+    private Animator anim;
     
    
     public float pointerDist = 5f;
@@ -33,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.LogError("ERROR - NO MAIN CAMERA WITH TAG 'MainCamera' IN SCENE");
         }
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -40,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+       
 
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
@@ -59,6 +63,10 @@ public class PlayerMovement : MonoBehaviour
         Vector2 lookDir = mousePos - rigidBodyLamp.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
         rigidBodyLamp.rotation = angle;
+
+
+        anim.SetFloat("XInput", mousePos.x - rigidBodyPlayer.position.x);
+        anim.SetFloat("YInput", mousePos.y-rigidBodyPlayer.position.y);
     }
 
 }
