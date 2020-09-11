@@ -9,7 +9,6 @@ public class GameManagerScript : MonoBehaviour
     //public static GameManagerScript instance;
     public float transitionTime = 1f;
     public int EscMessageNumber=-1;
-     
     
     // Start is called before the first frame update
     void Start()
