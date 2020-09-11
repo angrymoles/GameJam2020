@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 184427555}
   - component: {fileID: 184427557}
   m_Layer: 0
-  m_Name: Sprite Light 2D
+  m_Name: AngryMolesLogoLG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Intensity: 50
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 21300000, guid: 7d06d6fe7fba9594683ac059a46897ab,
+  m_LightCookieSprite: {fileID: 21300000, guid: e41aaf4e361438a4f8629f88bbfa1a79,
     type: 3}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -190,7 +190,7 @@ Transform:
   m_GameObject: {fileID: 184427554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.16, z: 0}
-  m_LocalScale: {x: 1.742951, y: 1.742951, z: 1.742951}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
