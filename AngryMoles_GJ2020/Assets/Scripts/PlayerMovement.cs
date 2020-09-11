@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float lightMovespeed;
     public float darkMovespeed;
     private Animator anim;
-    
-   
+
+
     public float pointerDist = 5f;
 
     [SerializeField]
@@ -43,23 +43,32 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-       
+
 
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void FixedUpdate()
     {
-        Vector2 frameTargetPos = (mousePos - rigidBodyPlayer.position);
-        float dist = frameTargetPos.sqrMagnitude;
-        if ( pointerDist * pointerDist > dist )
+        if (movement.magnitude > 0)
         {
-            return;
+            movement.Normalize();
+            rigidBodyPlayer.MovePosition(rigidBodyPlayer.position + movement * moveSpeed * Time.fixedDeltaTime * 5);
+            rigidBodyLamp.MovePosition(rigidBodyPlayer.position + movement * moveSpeed * Time.fixedDeltaTime * 5);
         }
-        frameTargetPos.Normalize();
-        frameTargetPos = frameTargetPos * moveSpeed * Time.fixedDeltaTime * 5;
-        rigidBodyPlayer.MovePosition(rigidBodyPlayer.position + frameTargetPos);
-        rigidBodyLamp.MovePosition(rigidBodyPlayer.position + frameTargetPos);
+        else
+        {
+            Vector2 frameTargetPos = (mousePos - rigidBodyPlayer.position);
+            float dist = frameTargetPos.sqrMagnitude;
+            if (pointerDist * pointerDist > dist)
+            {
+                return;
+            }
+            frameTargetPos.Normalize();
+            frameTargetPos = frameTargetPos * moveSpeed * Time.fixedDeltaTime * 5;
+            rigidBodyPlayer.MovePosition(rigidBodyPlayer.position + frameTargetPos);
+            rigidBodyLamp.MovePosition(rigidBodyPlayer.position + frameTargetPos);
+        }
         Vector2 lookDir = mousePos - rigidBodyLamp.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90.0f;
         rigidBodyLamp.rotation = angle;
