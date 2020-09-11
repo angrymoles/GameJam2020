@@ -7,7 +7,8 @@ public class GameOverScreen : MonoBehaviour
 {
     public void OnReplayClicked()
     {
-        GameManagerScript.Get().OnFadeComplete();
+       
+        //GameManagerScript.Get().OnFadeComplete();
     }
 
     public void OnQuitClicked()
