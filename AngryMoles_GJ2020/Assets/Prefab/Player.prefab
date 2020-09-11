@@ -962,6 +962,10 @@ MonoBehaviour:
   shieldCollider: {fileID: 6720743749312438573}
   shieldMinWidthPercent: 0.5
   shieldMinDistPercent: 0.5
+  shieldTriggerVFX: {fileID: 7843256481767067466, guid: 31154b72da78c0a44beb2462e653cd9d,
+    type: 3}
+  shieldEmptyVFX: {fileID: 7843256481767067466, guid: 239ce8f4d67d1674ca1fdbabbf7346d5,
+    type: 3}
 --- !u!61 &3659680490197567419
 BoxCollider2D:
   m_ObjectHideFlags: 0
