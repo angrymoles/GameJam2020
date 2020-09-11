@@ -13,16 +13,21 @@ public class CameraControllScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void LateUpdate()
     {
+        if (targets[0] == null)
+        {
+            return;
+        }
+
         Vector3 centerPoint = GetCenterPoint();
 
         Vector3 newPosition = centerPoint + offset;
