@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     private int curMovePoint;
     private MOVE_STATE moveState = MOVE_STATE.E_SPAWN_MOVE;
     private Transform target;
+    private Renderer enemyRenderer;
 
     public void SetMoveState(MOVE_STATE value)
     {
@@ -35,6 +36,8 @@ public class EnemyMovement : MonoBehaviour
         target = FindObjectOfType<Player>().GetComponent<Transform>();
         moveState = MOVE_STATE.E_SPAWN_MOVE;
         curMovePoint = 0;
+        //m_ObjectRenderer = GetComponent<Renderer>();
+        //gameObject.renderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -69,6 +72,14 @@ public class EnemyMovement : MonoBehaviour
         if (curMovePoint > 2)
         {
             return;
+        }
+
+        if (curMovePoint <= 1)
+        {
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
 
         Vector3 destPoint = ((Transform)(door.DoorPoints[curMovePoint + 1])).position;

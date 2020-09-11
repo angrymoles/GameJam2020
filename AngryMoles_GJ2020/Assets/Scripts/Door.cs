@@ -5,7 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public EnemyPoints[] enemyPoints;
-    public ArrayList DoorPoints;
+    public ArrayList  DoorPoints;
     public GameObject EnemyPrefab;
     public float spawnTime = 10.0f;
 
