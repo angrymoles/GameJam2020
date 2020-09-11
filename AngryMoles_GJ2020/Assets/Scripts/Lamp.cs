@@ -20,6 +20,7 @@ public class LightSettings
     public float outerMaxAngle = 120.0f;
     public float innerMaxRadius = 1.0f;
     public float outerMaxRadius = 5.0f;
+    [Range(0,3f)]
     public float maxIntensity = 2.0f;
     public float maxBarrierScale = 10.0f;
 
