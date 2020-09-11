@@ -5,8 +5,16 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    enum ShootState
+    {
+        E_NONE,
+        E_CHARGING,
+        E_SHOOT,
+    };
+
     public GameObject weapon;
     public Transform firePoint;
+    public Transform ChargePosition;
     public GameObject bulletPrefab;
     private Rigidbody2D rb;
 
@@ -18,6 +26,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     public EnemyMovement enemyMovement;
     public int stopMaxFireCount = 3;
+    public GameObject[] chargeEffects;
+    public float destroyChargeEffectTime = 2f;
+    private float chargetimeSpan = 0;
+    private ShootState eShootState = ShootState.E_NONE;
 
     private int fireCount;
 
@@ -25,6 +37,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        eShootState = ShootState.E_NONE;
         target = FindObjectOfType<Player>().GetComponent<Transform>();
         rb =weapon.GetComponent<Rigidbody2D>();
         fireCount = 0;
@@ -52,9 +65,21 @@ public class EnemyBehaviour : MonoBehaviour
             if (enemyMovement.GetMoveState() == EnemyMovement.MOVE_STATE.E_STOP
                 || enemyMovement.GetMoveState() == EnemyMovement.MOVE_STATE.E_END)
             {
-                Shoot();
+                if (eShootState == ShootState.E_NONE || eShootState == ShootState.E_CHARGING)
+                {
+                    Charge();
+                    yield return null;
+                }
+                else if (eShootState == ShootState.E_SHOOT)
+                {
+                    Shoot();
+                    yield return new WaitForSeconds(fireRate);
+                }
             }
-            yield return new WaitForSeconds(fireRate);
+            else
+            {
+                yield return new WaitForSeconds(fireRate);
+            }
         }
     }
 
@@ -63,6 +88,30 @@ public class EnemyBehaviour : MonoBehaviour
     {
 
     }
+
+    void Charge()
+    {
+        if (eShootState == ShootState.E_NONE)
+        {
+            eShootState = ShootState.E_CHARGING;
+            int index = Random.Range(0, chargeEffects.Length);
+            GameObject effect = Instantiate(chargeEffects[index], ChargePosition.position, Quaternion.identity);
+            Destroy(effect, destroyChargeEffectTime);
+            chargetimeSpan = 0f;
+            effect.transform.parent = ChargePosition;
+            return;
+        }
+
+        if (chargetimeSpan >= destroyChargeEffectTime)
+        {
+            eShootState = ShootState.E_SHOOT;
+        }
+        else
+        {
+            chargetimeSpan += Time.deltaTime;
+        }
+    }
+
     void Shoot()
     {
         if (target == null)
@@ -70,6 +119,7 @@ public class EnemyBehaviour : MonoBehaviour
             return;
         }
 
+        eShootState = ShootState.E_NONE;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         Vector3 dirction = target.position - firePoint.position;

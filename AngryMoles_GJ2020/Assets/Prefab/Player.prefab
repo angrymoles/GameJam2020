@@ -635,9 +635,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 3
-  movementSpeed: 0.5
+  movementSpeed: 1
   playerAction: {fileID: 1619448017278948600}
   playerMovement: {fileID: 1619448017278948601}
+  deathFXPrefab: {fileID: 1793710215769106762, guid: c2941cbff3b32444fb63807e49592877,
+    type: 3}
+  deathSprite: {fileID: 21300000, guid: 5715f1fe71540a5458b28a0594e4a603, type: 3}
   HP: 3
 --- !u!114 &1619448017278948601
 MonoBehaviour:
@@ -909,14 +912,14 @@ MonoBehaviour:
       innerMaxRadius: 1
       outerMaxRadius: 20
       maxIntensity: 2
-      color: {r: 1, g: 0.7149368, b: 0, a: 0}
+      color: {r: 1, g: 0.873141, b: 0.4009434, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
       outerMaxRadius: 5
       maxIntensity: 2
-      color: {r: 0.8867924, g: 0.765206, b: 0, a: 0}
+      color: {r: 1, g: 0.83839524, b: 0.3443396, a: 0}
     transitionDuration: 0.1
   shieldLightSettings:
     cone:
@@ -925,30 +928,30 @@ MonoBehaviour:
       innerMaxRadius: 1
       outerMaxRadius: 25
       maxIntensity: 3
-      color: {r: 1, g: 0.10849059, b: 0.10849059, a: 0}
+      color: {r: 0.9709463, g: 1, b: 0.6650944, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
       outerMaxRadius: 5
       maxIntensity: 3
-      color: {r: 1, g: 0, b: 0, a: 0}
+      color: {r: 1, g: 0.96882296, b: 0.5518868, a: 0}
     transitionDuration: 0.1
   shieldEmptyLightSettings:
     cone:
       innerMaxAngle: 75
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 5
+      outerMaxRadius: 2
       maxIntensity: 0.5
-      color: {r: 0, g: 1, b: 0.052369595, a: 0}
+      color: {r: 1, g: 0.7087828, b: 0, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 5
+      outerMaxRadius: 3
       maxIntensity: 0.5
-      color: {r: 0, g: 1, b: 0.008930683, a: 0}
+      color: {r: 1, g: 0.6204455, b: 0, a: 0}
     transitionDuration: 0.1
   shadowLightSettings:
     cone:
@@ -957,22 +960,22 @@ MonoBehaviour:
       innerMaxRadius: 0
       outerMaxRadius: 0
       maxIntensity: 0
-      color: {r: 0, g: 0.08817577, b: 1, a: 0}
+      color: {r: 0.28773582, g: 1, b: 0.31894684, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
       outerMaxRadius: 5
       maxIntensity: 0.3
-      color: {r: 0, g: 0.06844139, b: 1, a: 0}
+      color: {r: 0.3537736, g: 1, b: 0.3626044, a: 0}
     transitionDuration: 0.1
   point: {fileID: 340796631}
   cone: {fileID: 269379187}
   shadowSlider: {fileID: 3067920112763101934}
   shieldSlider: {fileID: 6860523007380949312}
-  maxShadowDuration: 2
-  maxShieldDuration: 5
-  shieldRechargeTime: 3
+  maxShadowDuration: 3
+  maxShieldDuration: 3
+  shieldRechargeTime: 2
   shieldRechargeInitialDelay: 1
   shieldCollider: {fileID: 6720743749312438573}
   shieldMinWidthPercent: 0.5

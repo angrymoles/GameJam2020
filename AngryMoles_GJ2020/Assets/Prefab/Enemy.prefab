@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1308340307110126600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6295714839931207350}
+  m_Layer: 11
+  m_Name: ChargePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6295714839931207350
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308340307110126600}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.12, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3045669889563309527}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3045669889086404179
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +148,7 @@ Transform:
   - {fileID: 3045669889153648471}
   - {fileID: 3045669890488023728}
   - {fileID: 3045669889086404180}
+  - {fileID: 6295714839931207350}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -185,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 3045669889153648470}
   firePoint: {fileID: 3045669889086404180}
+  ChargePosition: {fileID: 6295714839931207350}
   bulletPrefab: {fileID: 7939114945278376713, guid: 5eca5e570919f4b40b5bf59dd3d1c576,
     type: 3}
   bulletForce: 0.05
@@ -193,6 +225,14 @@ MonoBehaviour:
   targetDirection: {x: 0, y: 0, z: 0}
   enemyMovement: {fileID: 4001717466052187321}
   stopMaxFireCount: 0
+  chargeEffects:
+  - {fileID: 7843256481767067466, guid: 95ffc7e7477e3324b8737a73229c5c34, type: 3}
+  - {fileID: 7843256481767067466, guid: 239ce8f4d67d1674ca1fdbabbf7346d5, type: 3}
+  - {fileID: 7843256481767067466, guid: e75adccf6af72664889064634ae2815b, type: 3}
+  - {fileID: 7843256481767067466, guid: 663765520e925a143ae3ad387096c85c, type: 3}
+  - {fileID: 7843256481767067466, guid: 31154b72da78c0a44beb2462e653cd9d, type: 3}
+  - {fileID: 7843256481767067466, guid: de165adfe59db9844b0045177c465015, type: 3}
+  destroyChargeEffectTime: 2
 --- !u!114 &3611970170944531192
 MonoBehaviour:
   m_ObjectHideFlags: 0
