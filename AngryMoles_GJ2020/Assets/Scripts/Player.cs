@@ -6,10 +6,11 @@ public class Player : Character
 {
     public PlayerAction playerAction;
     public PlayerMovement playerMovement;
+    
 
     void Start()
     {
-        playerMovement.moveSpeed = movementSpeed;
+        playerMovement.moveSpeed = movementSpeed;        
         currentHealth = MaxHealth;
     }
 

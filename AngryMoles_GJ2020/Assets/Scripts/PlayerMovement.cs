@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [HideInInspector]
     public float moveSpeed = 5f;
+    public float dashSpeed = 4f;
     public float pointerDist = 5f;
     public Rigidbody2D rigidBody;
     private Camera mainCamera;
