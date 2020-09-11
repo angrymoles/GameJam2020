@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.Experimental.Rendering.LWRP;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 
@@ -35,6 +36,8 @@ public class Lamp : MonoBehaviour
     public LightPair shadowLightSettings;
     public UnityEngine.Experimental.Rendering.Universal.Light2D point;
     public UnityEngine.Experimental.Rendering.Universal.Light2D cone;
+    public Slider shadowSlider;
+    public Slider shieldSlider;
 
     public float maxShadowDuration = 2.0f;
     public float maxShieldDuration = 5f;
@@ -150,7 +153,11 @@ public class Lamp : MonoBehaviour
         sprite.enabled = false;
     }
 
-  
+    private void UpdateMeters()
+    {
+        shadowSlider.SetValueWithoutNotify((maxShadowDuration - elapsedShadowTime) / maxShadowDuration);
+        shieldSlider.SetValueWithoutNotify(currentCapacity / maxCapacity);
+    }
 
     void Update()
     {
@@ -163,6 +170,7 @@ public class Lamp : MonoBehaviour
                 transitionTiming = targetLightSettings.transitionDuration; ;
             }
         }
+        UpdateMeters();
         UpdateShield();
         UpdateLight();
     }
