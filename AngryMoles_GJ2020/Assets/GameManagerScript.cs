@@ -12,12 +12,16 @@ public class  GameManagerScript : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()    {
-       
+        if (SceneManager.GetActiveScene().name == "CoverScene")
+        {
+            SkipLogo();
+        }
     }
 
     public void Update()
     {
         ESCKey();
+        
     }
     public void LoadRandomScene()
     {        
@@ -28,6 +32,11 @@ public class  GameManagerScript : MonoBehaviour
     {
        GetComponent<Animator>().SetTrigger("FadeOut");
     }    
+    public void SkipLogo()
+    {
+        transitionTime = 4;
+        StartCoroutine(LoadLevel(0));
+    }
 
    public void ESCKey()
     {
@@ -39,6 +48,7 @@ public class  GameManagerScript : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
+        
         Debug.Log("Loading");
         if (levelIndex == 0) { }
         else if (levelIndex == 11) { }
@@ -50,6 +60,7 @@ public class  GameManagerScript : MonoBehaviour
         GetComponent<Animator>().SetTrigger("FadeOut");
 
         yield return new WaitForSeconds(transitionTime);
+        transitionTime = 1;
         SceneManager.LoadScene(levelIndex);   
 
     }

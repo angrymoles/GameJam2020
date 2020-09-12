@@ -121,6 +121,95 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &61901608
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3241312468600405344, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9bc0e39132e303141b2e87616a3ae96f, type: 3}
+    - target: {fileID: 3241312468600405349, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405350, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 651a61e9111351045b4d6cee5c93f53d, type: 3}
+    - target: {fileID: 3241312468600405350, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: Transform
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405350, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 61c004c6658121a40bf807a83cbf0b8e, type: 3}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241312468600405351, guid: 549e865401bdabc4c83ea5dadcea0637,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 549e865401bdabc4c83ea5dadcea0637, type: 3}
 --- !u!1 &184427554
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +221,7 @@ GameObject:
   - component: {fileID: 184427556}
   - component: {fileID: 184427555}
   - component: {fileID: 184427557}
+  - component: {fileID: 184427558}
   m_Layer: 0
   m_Name: AngryMolesLogoLG
   m_TagString: Untagged
@@ -214,6 +304,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &184427558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184427554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d6c932f2c9f514bb38042231f26209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &638844917
 PrefabInstance:
   m_ObjectHideFlags: 0

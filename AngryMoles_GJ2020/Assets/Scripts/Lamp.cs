@@ -171,7 +171,7 @@ public class Lamp : MonoBehaviour
             var playerCollider = player.GetComponent<PolygonCollider2D>();
             if ( playerCollider != null )
             {
-                playerCollider.enabled = false;
+              //  playerCollider.enabled = false;
             }            
             oldLightSettings = currentLightSettings.Clone();
             targetLightSettings = shadowLightSettings.Clone();
