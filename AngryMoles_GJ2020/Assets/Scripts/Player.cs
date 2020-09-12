@@ -26,8 +26,6 @@ public class Player : Character
     private int shieldScore;
     private float levelStartTime;
 
-    private Audiomanager audioM;
-
     void Start()
     {
         playerMovement.moveSpeed = movementSpeed;
@@ -35,7 +33,6 @@ public class Player : Character
         timeScore = 0;
         killScore = 0;
         shieldScore = 0;
-        audioM = FindObjectOfType<Audiomanager>();
 
         levelStartTime = Time.timeSinceLevelLoad;
 
@@ -75,13 +72,10 @@ public class Player : Character
 
     public void TakeDamage(int damage)
     {
-        
-
         HP -= damage;
         
         if (HP <= 0)
         {
-            audioM.PlayOneTimeSound("Player_Death");
             gameObject.SetActive(false);
             GameObject effect = Instantiate(deathFXPrefab, transform.position, Quaternion.identity);
             Destroy(effect, 2f);
