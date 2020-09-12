@@ -39,7 +39,7 @@ public class  GameManagerScript : MonoBehaviour
 
     IEnumerator LoadLevel(int levelIndex)
     {
-
+        Debug.Log("Loading");
         if (levelIndex == 0) { }
         else if (levelIndex == 11) { }
         else
