@@ -15,6 +15,12 @@ public class Player : Character
     public int killScoreMultiplier = 5;
     public int shieldReflectScoreMultiplier = 2;
     public TMPro.TextMeshProUGUI scoreText;
+
+    public GameObject HeartPrefab;
+    public LayoutGroup healthBar;
+
+    private List<GameObject> hearts = new List<GameObject>();
+
     private int timeScore;
     private int killScore;
     private int shieldScore;
@@ -29,6 +35,13 @@ public class Player : Character
         shieldScore = 0;
 
         levelStartTime = Time.timeSinceLevelLoad;
+
+        for( int i = 0; i < HP; ++i )
+        {
+            var heart = Instantiate(HeartPrefab);
+            heart.transform.parent = healthBar.transform;
+            hearts.Add(heart);
+        }
     }
 
     void Update()
@@ -38,7 +51,7 @@ public class Player : Character
 
         if ( scoreText != null )
         {
-            scoreText.SetText(GetTotalScore().ToString());
+            scoreText.SetText("Score: " + GetTotalScore().ToString());
         }
     }
 
@@ -60,7 +73,7 @@ public class Player : Character
     public void TakeDamage(int damage)
     {
         HP -= damage;
-
+        
         if (HP <= 0)
         {
             gameObject.SetActive(false);
@@ -73,6 +86,13 @@ public class Player : Character
             }
             //GameManagerScript.Get().FadeToGameOver();
             SceneManager.LoadScene("Game_Over_Screen", LoadSceneMode.Additive);
+        }
+        else
+        {
+            for(int j = hearts.Count - 1; j > HP - 1; --j)
+            {
+                hearts[j].SetActive(false);
+            }            
         }
     }
 
