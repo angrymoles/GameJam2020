@@ -7,6 +7,7 @@ public class EnemyPoints : MonoBehaviour
     public ArrayList EnemyMovePoints;
     void Start()
     {
+        transform.rotation = Quaternion.Euler(Vector3.zero);
         EnemyMovePoints = new ArrayList();
         Transform[] allChildren = GetComponentsInChildren<Transform>();
 

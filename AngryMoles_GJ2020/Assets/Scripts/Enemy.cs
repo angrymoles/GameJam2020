@@ -14,14 +14,15 @@ public class Enemy : MonoBehaviour
 
         if (HP <= 0)
         {
-            anim.SetTrigger("Dead");
+            
             var playerObj = GameObject.FindGameObjectWithTag("Player");
             if ( playerObj )
             {
                 var player = playerObj.GetComponent<Player>();
                 player.ScoreKill();
+                anim.SetTrigger("Dead");
             }
-            Destroy(gameObject,10);
+            Destroy(gameObject,1);
         }
     }
 }

@@ -17,6 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform ChargePosition;
     public GameObject bulletPrefab;
     private Rigidbody2D rb;
+    public float bulletSurviveDuration=5;
 
     public float bulletForce = 20f;
     public float fireRate = 2.0f;
@@ -121,6 +122,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         eShootState = ShootState.E_NONE;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Destroy(bullet, bulletSurviveDuration);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         Vector3 dirction = target.position - firePoint.position;
         dirction.Normalize();
