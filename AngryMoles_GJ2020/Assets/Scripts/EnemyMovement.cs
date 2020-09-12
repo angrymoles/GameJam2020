@@ -25,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
     private float curChaseTime = 0.0f;
     private const float chaseDistance = 2.0f;
     public bool bFinishedMove = false;
+    public Animator anim;
 
     public void SetMoveState(MOVE_STATE value)
     {
@@ -44,6 +45,7 @@ public class EnemyMovement : MonoBehaviour
         bFinishedMove = true;
         enemyRenderer = gameObject.GetComponent<Renderer>();
         enemyRenderer.enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -79,9 +81,13 @@ public class EnemyMovement : MonoBehaviour
         if (target != null)
         {
             Vector2 targetPosition = new Vector2(target.position.x, target.position.y);
+            
             Vector2 lookDir = targetPosition - rigidBody.position;
-            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 270.0f;
-            rigidBody.rotation = angle;
+
+            anim.SetFloat("XInput", lookDir.x);
+            anim.SetFloat("YInput", lookDir.y);
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg ;
+           // rigidBody.rotation = angle;
         }
     }
 
@@ -93,6 +99,8 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Vector3 destPoint = ((Transform)(door.DoorPoints[curMovePoint + 1])).position;
+        anim.SetFloat("XInput", destPoint.x);
+        anim.SetFloat("YInput", destPoint.y);
         //SpawnPoint
         if (MoveEnemey(destPoint) )
         {

@@ -36,6 +36,7 @@ public class Player : Character
         killScore = 0;
         shieldScore = 0;
         audioM = FindObjectOfType<Audiomanager>();
+        transform.rotation = Quaternion.Euler(Vector3.zero);
 
         levelStartTime = Time.timeSinceLevelLoad;
 
