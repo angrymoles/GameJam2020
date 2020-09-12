@@ -7,12 +7,15 @@ using UnityEngine.SceneManagement;
 public class  GameManagerScript : MonoBehaviour
 {
     //public static GameManagerScript instance;
-    public float transitionTime = 2f;
+    public float transitionTime = 1f;
     public int EscMessageNumber=-1;
     
     // Start is called before the first frame update
     void Start()    {
-       
+        if (SceneManager.GetActiveScene().name == "CoverScene")
+        {
+            SkipLogo();
+        }
     }
 
     public void Update()
@@ -21,14 +24,18 @@ public class  GameManagerScript : MonoBehaviour
         
     }
     public void LoadRandomScene()
-    {
+    {        
         StartCoroutine(LoadLevel(3));
     }
-       
+
+    public void FadeToLevel(int levelIndex)
+    {
+       GetComponent<Animator>().SetTrigger("FadeOut");
+    }    
     public void SkipLogo()
     {
-        
-        StartCoroutine(LoadLevel(19));
+        transitionTime = 4;
+        StartCoroutine(LoadLevel(0));
     }
 
    public void ESCKey()
@@ -43,11 +50,6 @@ public class  GameManagerScript : MonoBehaviour
     {
         
         Debug.Log("Loading");
-        if (levelIndex == 19)
-        {
-            yield return new WaitForSeconds(3);
-            SceneManager.LoadScene("Level0");
-        }
         if (levelIndex == 0) { }
         else if (levelIndex == 11) { }
         else
@@ -57,9 +59,8 @@ public class  GameManagerScript : MonoBehaviour
        
         GetComponent<Animator>().SetTrigger("FadeOut");
 
-       
         yield return new WaitForSeconds(transitionTime);
-      
+        transitionTime = 2;
         SceneManager.LoadScene(levelIndex);   
 
     }
