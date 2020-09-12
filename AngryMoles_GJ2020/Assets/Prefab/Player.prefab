@@ -493,8 +493,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479064724496078910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 5.76, z: 0}
-  m_LocalScale: {x: 2.12355, y: 0.77625, z: 1}
+  m_LocalPosition: {x: 0.03, y: 4.91, z: 0}
+  m_LocalScale: {x: 1.7253844, y: 0.7180313, z: 1}
   m_Children: []
   m_Father: {fileID: 1619448017792371628}
   m_RootOrder: 2
@@ -730,8 +730,8 @@ MonoBehaviour:
   deathSprite: {fileID: 21300000, guid: 5715f1fe71540a5458b28a0594e4a603, type: 3}
   HP: 3
   timeScoreMultiplier: 1
-  killScoreMultiplier: 5
-  shieldReflectScoreMultiplier: 2
+  killScoreMultiplier: 100
+  shieldReflectScoreMultiplier: 0
   scoreText: {fileID: 405445033693865863}
   HeartPrefab: {fileID: 5672674815307144257, guid: a850e43e64a232b46999372fa5da4976,
     type: 3}
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  lightMovespeed: 0.5
+  lightMovespeed: 1
   darkMovespeed: 1.5
   enableMouseFollow: 0
   pointerDist: 1
@@ -872,17 +872,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.0063135624, y: 0.79924196}
-      - {x: -0.28945082, y: 0.65142524}
-      - {x: -0.40939498, y: 0.41903538}
-      - {x: -0.28454387, y: 0.11869401}
-      - {x: -0.33802003, y: -0.28928226}
-      - {x: -0.15117764, y: -0.6295154}
-      - {x: -0.006313443, y: -0.5163482}
-      - {x: 0.12561345, y: -0.63207734}
-      - {x: 0.29920697, y: -0.2473856}
-      - {x: 0.24960783, y: 0.12541388}
-      - {x: 0.38921884, y: 0.5356365}
+    - - {x: 0.0049014688, y: -0.2661938}
+      - {x: -0.10440177, y: -0.3018591}
+      - {x: -0.22995332, y: -0.34919986}
+      - {x: -0.30697405, y: -0.45888418}
+      - {x: -0.32119727, y: -0.59209055}
+      - {x: -0.25772136, y: -0.7192364}
+      - {x: -0.006313443, y: -0.7518654}
+      - {x: 0.23215723, y: -0.70497566}
+      - {x: 0.29920697, y: -0.56140894}
+      - {x: 0.26082304, y: -0.40730405}
+      - {x: 0.15930954, y: -0.31671196}
 --- !u!95 &6802953816129237220
 Animator:
   serializedVersion: 3
@@ -1005,30 +1005,30 @@ MonoBehaviour:
       innerMaxAngle: 75
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 10
+      outerMaxRadius: 8
       maxIntensity: 2
       color: {r: 1, g: 0.873141, b: 0.4009434, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 10
+      outerMaxRadius: 5
       maxIntensity: 1.5
       color: {r: 1, g: 0.83839524, b: 0.3443396, a: 0}
     transitionDuration: 0.1
   shieldLightSettings:
     cone:
-      innerMaxAngle: 90
+      innerMaxAngle: 85
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 10
+      outerMaxRadius: 9
       maxIntensity: 3
       color: {r: 0.9709463, g: 1, b: 0.6650944, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 5
+      outerMaxRadius: 5.5
       maxIntensity: 2
       color: {r: 1, g: 0.96882296, b: 0.5518868, a: 0}
     transitionDuration: 0.1
@@ -1037,16 +1037,16 @@ MonoBehaviour:
       innerMaxAngle: 75
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 0
+      outerMaxRadius: 3
       maxIntensity: 0
-      color: {r: 1, g: 0.7087828, b: 0, a: 0}
+      color: {r: 1, g: 0.096982926, b: 0, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 3
-      maxIntensity: 0.5
-      color: {r: 1, g: 0.6204455, b: 0, a: 0}
+      outerMaxRadius: 4
+      maxIntensity: 1
+      color: {r: 1, g: 0.07453532, b: 0, a: 0}
     transitionDuration: 0.1
   shadowLightSettings:
     cone:
@@ -1060,7 +1060,7 @@ MonoBehaviour:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 5
+      outerMaxRadius: 0
       maxIntensity: 1
       color: {r: 0.3537736, g: 1, b: 0.3626044, a: 0}
     transitionDuration: 0.1
@@ -1068,15 +1068,15 @@ MonoBehaviour:
   cone: {fileID: 269379187}
   shadowSlider: {fileID: 3067920112763101934}
   shieldSlider: {fileID: 6860523007380949312}
-  maxShadowDuration: 3
-  shadowRechargeTime: 2
-  shadowRechargeDelay: 1
+  maxShadowDuration: 2
+  shadowRechargeTime: 1
+  shadowRechargeDelay: 0.5
   maxShieldDuration: 3
-  shieldRechargeTime: 2
-  shieldRechargeInitialDelay: 1
+  shieldRechargeTime: 1.5
+  shieldRechargeInitialDelay: 0.5
   shieldCollider: {fileID: 6720743749312438573}
-  shieldMinWidthPercent: 0.75
-  shieldMinDistPercent: 0.75
+  shieldMinWidthPercent: 0.6
+  shieldMinDistPercent: 0.6
   shieldTriggerFX: {fileID: 0}
   shieldEmptyFX: {fileID: 0}
   onCollideProjectileFX: {fileID: 0}
@@ -1735,7 +1735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0025482178, y: 1.3775005}
+  m_AnchoredPosition: {x: 0.002456665, y: 1.3775005}
   m_SizeDelta: {x: 0.0049744, y: 3.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5691587612428571050
