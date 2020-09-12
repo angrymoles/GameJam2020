@@ -587,8 +587,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479064724496078910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 4.91, z: 0}
-  m_LocalScale: {x: 1.7253844, y: 0.7180313, z: 1}
+  m_LocalPosition: {x: 0.03, y: 3.29, z: 0}
+  m_LocalScale: {x: 1.2335118, y: 0.53523487, z: 1}
   m_Children: []
   m_Father: {fileID: 1619448017792371628}
   m_RootOrder: 2
@@ -1117,7 +1117,7 @@ MonoBehaviour:
       innerMaxRadius: 1
       outerMaxRadius: 9
       maxIntensity: 3
-      color: {r: 0.9709463, g: 1, b: 0.6650944, a: 0}
+      color: {r: 0.7877358, g: 1, b: 0.9799634, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
@@ -1165,8 +1165,8 @@ MonoBehaviour:
   maxShadowDuration: 2
   shadowRechargeTime: 1
   shadowRechargeDelay: 0.5
-  maxShieldDuration: 3
-  shieldRechargeTime: 1.5
+  maxShieldDuration: 3.5
+  shieldRechargeTime: 1
   shieldRechargeInitialDelay: 0.5
   shieldCollider: {fileID: 6720743749312438573}
   shieldMinWidthPercent: 0.6
