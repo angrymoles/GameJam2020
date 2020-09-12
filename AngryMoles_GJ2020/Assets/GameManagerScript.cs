@@ -60,7 +60,7 @@ public class  GameManagerScript : MonoBehaviour
         GetComponent<Animator>().SetTrigger("FadeOut");
 
         yield return new WaitForSeconds(transitionTime);
-        transitionTime = 1;
+        transitionTime = 2;
         SceneManager.LoadScene(levelIndex);   
 
     }

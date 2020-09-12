@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: PlayerDeath
-    clip: {fileID: 8300000, guid: 786be4e9d4a3d9141a56c411f2de5f7b, type: 3}
-    volume: 1
-    pitch: 1
+  - name: Player_Death
+    clip: {fileID: 8300000, guid: a95aab17a7c6e3c4fbd8d080c7bcb193, type: 3}
+    volume: 0.623
+    pitch: 1.25
     loop: 0
     source: {fileID: 0}
   - name: GhostWispers

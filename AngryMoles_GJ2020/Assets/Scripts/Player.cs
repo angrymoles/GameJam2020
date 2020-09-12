@@ -26,7 +26,7 @@ public class Player : Character
     private int shieldScore;
     private float levelStartTime;
 
-    private Audiomanager audioM;
+    public Audiomanager audioM;
 
     void Start()
     {
@@ -82,7 +82,7 @@ public class Player : Character
         
         if (HP <= 0)
         {
-            audioM.PlayOneTimeSound("Player_Death");
+           // audioM.PlayOneTimeSound("Player_Death");
             gameObject.SetActive(false);
             GameObject effect = Instantiate(deathFXPrefab, transform.position, Quaternion.identity);
             Destroy(effect, 2f);
