@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 8239350983513921941}
   - component: {fileID: 8239350983513921938}
   m_Layer: 0
-  m_Name: Door
+  m_Name: Door - 11s
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   - {fileID: 7410797075071031795}
   EnemyPrefab: {fileID: 3045669889563309524, guid: d7ffb1cc408ecfc4b87a30fc8b55cef1,
     type: 3}
-  spawnTime: 5
+  spawnTime: 11
 --- !u!1001 &9016988837788076515
 PrefabInstance:
   m_ObjectHideFlags: 0
