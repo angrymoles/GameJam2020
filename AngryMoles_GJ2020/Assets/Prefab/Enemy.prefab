@@ -224,7 +224,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetDirection: {x: 0, y: 0, z: 0}
   enemyMovement: {fileID: 4001717466052187321}
-  stopMaxFireCount: 0
+  stopMaxFireCount: 1
   chargeEffects:
   - {fileID: 7843256481767067466, guid: 95ffc7e7477e3324b8737a73229c5c34, type: 3}
   - {fileID: 7843256481767067466, guid: 239ce8f4d67d1674ca1fdbabbf7346d5, type: 3}
@@ -232,7 +232,7 @@ MonoBehaviour:
   - {fileID: 7843256481767067466, guid: 663765520e925a143ae3ad387096c85c, type: 3}
   - {fileID: 7843256481767067466, guid: 31154b72da78c0a44beb2462e653cd9d, type: 3}
   - {fileID: 7843256481767067466, guid: de165adfe59db9844b0045177c465015, type: 3}
-  destroyChargeEffectTime: 2
+  destroyChargeEffectTime: 1
 --- !u!114 &3611970170944531192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a493a5133cd54847a57f490b448bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 1
+  enemySpeed: 2
   door: {fileID: 0}
   enemyPoints: {fileID: 0}
   rigidBody: {fileID: 1409214300586040918}
