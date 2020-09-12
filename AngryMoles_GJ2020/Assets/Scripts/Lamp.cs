@@ -180,7 +180,9 @@ public class Lamp : MonoBehaviour
             {
                 DeactivateShield();
             }
-            shadowActive = true;            
+            shadowActive = true;
+            player.gameObject.layer = 14;
+            player.GetComponent<PlayerMovement>().moveSpeed = player.GetComponent<PlayerMovement>().darkMovespeed;
         }
     }
     
@@ -204,6 +206,8 @@ public class Lamp : MonoBehaviour
             targetLightSettings = defaultLightSettings.Clone();
             ReturnToDefault();
             elapsedShadowDownTime = 0f;
+            player.gameObject.layer = 9;
+            player.GetComponent<PlayerMovement>().moveSpeed = player.GetComponent<PlayerMovement>().lightMovespeed;
         }
     }
 
