@@ -8,10 +8,12 @@ public class DarkFormCheatScript : MonoBehaviour
     public GameObject darkform;
     public GameObject Lamp;
     public GameObject PlayerAnimation;
+    
 
     private void Start()
     {
         darkform.SetActive(false);
+       
     }
 
     void Update()
@@ -25,6 +27,9 @@ public class DarkFormCheatScript : MonoBehaviour
             }
             Lamp.SetActive(false);
             PlayerAnimation.GetComponent<SpriteRenderer>().enabled = false;
+           
+
+            
            
         }
         if (Input.GetMouseButtonUp(1))
