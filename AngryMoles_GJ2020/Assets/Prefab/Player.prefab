@@ -406,8 +406,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479064724496078910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 5.76, z: 0}
-  m_LocalScale: {x: 2.12355, y: 0.77625, z: 1}
+  m_LocalPosition: {x: 0.18, y: 4.75, z: 0}
+  m_LocalScale: {x: 1.8050175, y: 0.7368311, z: 1}
   m_Children: []
   m_Father: {fileID: 1619448017792371628}
   m_RootOrder: 2
@@ -784,17 +784,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.0063135624, y: 0.79924196}
-      - {x: -0.28945082, y: 0.65142524}
-      - {x: -0.40939498, y: 0.41903538}
-      - {x: -0.28454387, y: 0.11869401}
-      - {x: -0.33802003, y: -0.28928226}
-      - {x: -0.15117764, y: -0.6295154}
-      - {x: -0.006313443, y: -0.5163482}
-      - {x: 0.12561345, y: -0.63207734}
-      - {x: 0.29920697, y: -0.2473856}
-      - {x: 0.24960783, y: 0.12541388}
-      - {x: 0.38921884, y: 0.5356365}
+    - - {x: -0.0063135587, y: -0.37117988}
+      - {x: -0.12605855, y: -0.38561514}
+      - {x: -0.21932653, y: -0.4279364}
+      - {x: -0.2812094, y: -0.5115332}
+      - {x: -0.29800555, y: -0.6527466}
+      - {x: -0.18785754, y: -0.74622405}
+      - {x: -0.006313443, y: -0.77644193}
+      - {x: 0.21653752, y: -0.731784}
+      - {x: 0.2958725, y: -0.6041808}
+      - {x: 0.25961155, y: -0.484806}
+      - {x: 0.14579782, y: -0.40803698}
 --- !u!95 &6802953816129237220
 Animator:
   serializedVersion: 3
@@ -917,14 +917,14 @@ MonoBehaviour:
       innerMaxAngle: 75
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 10
+      outerMaxRadius: 8
       maxIntensity: 2
       color: {r: 1, g: 0.873141, b: 0.4009434, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 10
+      outerMaxRadius: 5
       maxIntensity: 1.5
       color: {r: 1, g: 0.83839524, b: 0.3443396, a: 0}
     transitionDuration: 0.1
@@ -933,7 +933,7 @@ MonoBehaviour:
       innerMaxAngle: 90
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 10
+      outerMaxRadius: 9
       maxIntensity: 3
       color: {r: 0.9709463, g: 1, b: 0.6650944, a: 0}
     point:
@@ -941,7 +941,7 @@ MonoBehaviour:
       outerMaxAngle: 360
       innerMaxRadius: 0
       outerMaxRadius: 5
-      maxIntensity: 2
+      maxIntensity: 2.5
       color: {r: 1, g: 0.96882296, b: 0.5518868, a: 0}
     transitionDuration: 0.1
   shieldEmptyLightSettings:
@@ -949,16 +949,16 @@ MonoBehaviour:
       innerMaxAngle: 75
       outerMaxAngle: 360
       innerMaxRadius: 1
-      outerMaxRadius: 0
+      outerMaxRadius: 4
       maxIntensity: 0
-      color: {r: 1, g: 0.7087828, b: 0, a: 0}
+      color: {r: 1, g: 0.108663015, b: 0, a: 0}
     point:
       innerMaxAngle: 360
       outerMaxAngle: 360
       innerMaxRadius: 0
-      outerMaxRadius: 3
-      maxIntensity: 0.5
-      color: {r: 1, g: 0.6204455, b: 0, a: 0}
+      outerMaxRadius: 4
+      maxIntensity: 1
+      color: {r: 1, g: 0.050477777, b: 0, a: 0}
     transitionDuration: 0.1
   shadowLightSettings:
     cone:
@@ -973,22 +973,22 @@ MonoBehaviour:
       outerMaxAngle: 360
       innerMaxRadius: 0
       outerMaxRadius: 5
-      maxIntensity: 1
+      maxIntensity: 0
       color: {r: 0.3537736, g: 1, b: 0.3626044, a: 0}
     transitionDuration: 0.1
   point: {fileID: 340796631}
   cone: {fileID: 269379187}
   shadowSlider: {fileID: 3067920112763101934}
   shieldSlider: {fileID: 6860523007380949312}
-  maxShadowDuration: 3
-  shadowRechargeTime: 2
-  shadowRechargeDelay: 1
+  maxShadowDuration: 2
+  shadowRechargeTime: 1
+  shadowRechargeDelay: 0.5
   maxShieldDuration: 3
-  shieldRechargeTime: 2
-  shieldRechargeInitialDelay: 1
+  shieldRechargeTime: 1.5
+  shieldRechargeInitialDelay: 0.5
   shieldCollider: {fileID: 6720743749312438573}
-  shieldMinWidthPercent: 0.75
-  shieldMinDistPercent: 0.75
+  shieldMinWidthPercent: 0.6
+  shieldMinDistPercent: 0.6
   shieldTriggerFX: {fileID: 0}
   shieldEmptyFX: {fileID: 0}
   onCollideProjectileFX: {fileID: 0}
@@ -2111,6 +2111,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5203460624426866193}
     m_Modifications:
+    - target: {fileID: 687696783423162015, guid: 54c8b31a02b2bb044b3bc8f0cbadfc84,
+        type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 1166325380033521242, guid: 54c8b31a02b2bb044b3bc8f0cbadfc84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2170,6 +2175,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Eyes
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159785830455051876, guid: 54c8b31a02b2bb044b3bc8f0cbadfc84,
+        type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829949555184880097, guid: 54c8b31a02b2bb044b3bc8f0cbadfc84,
+        type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829949555184880097, guid: 54c8b31a02b2bb044b3bc8f0cbadfc84,
+        type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c8b31a02b2bb044b3bc8f0cbadfc84, type: 3}
